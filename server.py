@@ -1,4 +1,7 @@
 """Recipe website"""
+from pprint import pformat
+import os
+import requests
 
 from jinja2 import StrictUndefined
 
@@ -17,12 +20,92 @@ app.secret_key = "ABC"
 # This raises an error instead.
 app.jinja_env.undefined = StrictUndefined
 
+# Retrieve tokens and keys, set movie url
+RAPIDAPI_TOKEN = os.environ.get('RAPIDAPI_TOKEN')
+RAPIDAPI_KEY = os.environ.get('RAPIDAPI_KEY')
+MOVIEDB_KEY = os.environ.get('MOVIEDB_KEY')
+MOVIEDB_URL = "https://api.themoviedb.org/3/"
+
 
 @app.route('/')
 def index():
     """Homepage."""
 
     return render_template("homepage.html")
+
+
+@app.route('/results')
+def recipe_results():
+    """Output of recipes user queried from putting in ingredients"""
+
+    search = request.args.get('ingredients')
+    payload = {'key': RAPIDAPI_KEY,
+                'q': search,
+                'sort': 'r'}
+   
+    headers = {"X-RapidAPI-Key": RAPIDAPI_TOKEN}
+
+    response = requests.get("https://community-food2fork.p.rapidapi.com/search", 
+                            params=payload, headers=headers)
+
+    print(response)
+    data = response.json()
+    print(data)
+    recipes = data['recipes']
+
+    # ingredient_search = search.split(", ")
+    # print(ingredient_search)
+
+    # recipe_data = []
+    # for recipe in recipes:
+    #     rId = recipe['recipe_id']
+    #     payload_get = {'key': "8b50ec6830e40ad83082a5b276c51a39",
+    #                     'rId': rId}
+    #     response = requests.get("https://community-food2fork.p.rapidapi.com/get", 
+    #                         params=payload_get, headers=headers)
+    #     data = response.json()
+    #     ingredients = data['recipe']['ingredients']
+    #     print(ingredients)
+
+
+    # search = request.args.get('ingredients')
+    # payload = {'i': search}
+    # response = requests.get("http://www.recipepuppy.com/api/", params=payload)
+    # data = response.json()
+    # print(data)
+    # recipes = data['results']
+
+
+    return render_template("recipe_results.html", recipes=recipes)
+
+
+@app.route('/movies')
+def movie_results():
+    """Output of movie recommendations user queried"""
+
+    query_movie = request.args.get('movie')
+    payload = {'api_key': MOVIEDB_KEY,
+                'query': query_movie}
+    
+
+    response = requests.get(MOVIEDB_URL + "search/movie", 
+                            params=payload)
+    
+    data = response.json()
+    print(data)
+    results = data['results']
+    movie_ids = [ movie['id'] for movie in results ]
+    print(movie_ids)
+
+    movie_data = []
+    for movie_id in movie_ids:
+        payload = {'api_key': MOVIEDB_KEY}
+        movie_recc = requests.get(MOVIEDB_URL + f"movie/{movie_id}/recommendations", params=payload)
+        data = movie_recc.json()
+        movie_data.append(data['results'])
+        print(movie_data)
+
+    return render_template("movie_recc_results.html", movie_data=movie_data[0])
 
 
 @app.route('/login', methods=['GET'])

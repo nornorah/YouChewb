@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+      <h2>Recipes</h2>
+      <ul class="recipes">
+        {% for recipe in recipes %}
+          <li> <a href="{{ recipe['source_url]' }}">
+          <img src="{{ recipe['image_url'] }}"></a> 
+          <br>
+          {{ recipe['title'] }}
+          </li>
+          <br>
+        {% endfor %}
+      </ul>
+
+{% endblock %}
