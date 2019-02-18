@@ -1,4 +1,4 @@
-"""Recipe website"""
+"""Recipe and Movie Rec website"""
 from pprint import pformat
 import os
 import requests
@@ -20,10 +20,14 @@ app.secret_key = "ABC"
 # This raises an error instead.
 app.jinja_env.undefined = StrictUndefined
 
-# Retrieve tokens and keys, set movie url
+# Retrieve tokens and keys, set moviedb url
 RAPIDAPI_TOKEN = os.environ.get('RAPIDAPI_TOKEN')
 RAPIDAPI_KEY = os.environ.get('RAPIDAPI_KEY')
 MOVIEDB_KEY = os.environ.get('MOVIEDB_KEY')
+
+EDAMAM_KEY = os.environ.get('EDAMAM_KEY')
+EDAMAM_ID = os.environ.get('EDAMAM_ID')
+
 MOVIEDB_URL = "https://api.themoviedb.org/3/"
 
 
@@ -34,24 +38,22 @@ def index():
     return render_template("homepage.html")
 
 
-@app.route('/results')
+@app.route('/recipes')
 def recipe_results():
     """Output of recipes user queried from putting in ingredients"""
 
-    search = request.args.get('ingredients')
-    payload = {'key': RAPIDAPI_KEY,
-                'q': search,
-                'sort': 'r'}
+    # search = request.args.get('ingredients')
+    # payload = {'key': RAPIDAPI_KEY,
+    #             'q': search,
+    #             'sort': 'r'}
    
-    headers = {"X-RapidAPI-Key": RAPIDAPI_TOKEN}
+    # headers = {"X-RapidAPI-Key" : RAPIDAPI_TOKEN}
 
-    response = requests.get("https://community-food2fork.p.rapidapi.com/search", 
-                            params=payload, headers=headers)
+    # response = requests.get("https://community-food2fork.p.rapidapi.com/search", 
+    #                         params=payload, headers=headers)
 
-    print(response)
-    data = response.json()
-    print(data)
-    recipes = data['recipes']
+    # data = response.json()
+    # recipes = data['recipes']
 
     # ingredient_search = search.split(", ")
     # print(ingredient_search)
@@ -75,38 +77,57 @@ def recipe_results():
     # print(data)
     # recipes = data['results']
 
+    search = request.args.get('ingredients')
+    payload = {'q': search,'app_id': EDAMAM_ID, 'app_key': EDAMAM_KEY}
+    response = requests.get("https://api.edamam.com/search", params=payload)
+
+    data = response.json()
+    recipe_results = data['hits']
+    recipes =  {recipe['recipe'] for recipe in recipe_results}
+    ingredients = [ recipe['ingredientLines'] for recipe in recipes ]
+    print(ingredients)
 
     return render_template("recipe_results.html", recipes=recipes)
 
 
 @app.route('/movies')
 def movie_results():
-    """Output of movie recommendations user queried"""
+    """Output of movie recommendations from the movie title user queried"""
 
-    query_movie = request.args.get('movie')
+    movie_query = request.args.get('movie')
     payload = {'api_key': MOVIEDB_KEY,
-                'query': query_movie}
+                'query': movie_query}
     
 
     response = requests.get(MOVIEDB_URL + "search/movie", 
                             params=payload)
     
     data = response.json()
-    print(data)
     results = data['results']
     movie_ids = [ movie['id'] for movie in results ]
-    print(movie_ids)
 
     movie_data = []
     for movie_id in movie_ids:
         payload = {'api_key': MOVIEDB_KEY}
-        movie_recc = requests.get(MOVIEDB_URL + f"movie/{movie_id}/recommendations", params=payload)
+        movie_recc = requests.get(MOVIEDB_URL + f"movie/{movie_id}/recommendations", 
+                                params=payload)
         data = movie_recc.json()
         movie_data.append(data['results'])
-        print(movie_data)
 
     return render_template("movie_recc_results.html", movie_data=movie_data[0])
 
+@app.route('/tv_shows')
+def tv_show_results():
+    """Output of TV show recommendations from the TV show title user queried"""
+
+    tv_show_query = request.args.get('tv')
+
+
+@app.route('/save_recipe')
+def save_recipe():
+    """Save recipe to user's database of recipes"""
+
+    recipe = request.args.get()
 
 @app.route('/login', methods=['GET'])
 def login_form():
@@ -178,6 +199,7 @@ if __name__ == "__main__":
     # that we invoke the DebugToolbarExtension
 
     app.debug = True
+    app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
     connect_to_db(app)
 

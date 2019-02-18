@@ -5,13 +5,16 @@
       <h2>Recipes</h2>
       <ul class="recipes">
         {% for recipe in recipes %}
-          <li> <a href="{{ recipe['source_url]' }}">
-          <img src="{{ recipe['image_url'] }}"></a> 
+          <li> <a href="{{ recipe['url'] }}">
+          <img src="{{ recipe['image'] }}"></a> 
           <br>
-          {{ recipe['title'] }}
+          {{ recipe['label'] }}
+          <br>
+          {{ recipe['ingredientLines']}}
+
+        {% endfor %}
           </li>
           <br>
-        {% endfor %}
       </ul>
 
 {% endblock %}

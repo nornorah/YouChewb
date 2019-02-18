@@ -6,7 +6,9 @@
       <ul class="movies">
         {% for movie in movie_data %}
           <li>
-          <img src="https://image.tmdb.org/t/p/w500/{{ movie['poster_path'] }}">
+          <a href="https://www.themoviedb.org/movie/{{ movie['id'] }}">
+            <img src="https://image.tmdb.org/t/p/w500/{{ movie['poster_path'] }}">
+          </a>
           <br>
           {{ movie['title'] }}
           </li>
@@ -15,3 +17,4 @@
       </ul>
 
 {% endblock %}
+

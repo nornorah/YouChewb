@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <body>
   {% for flash in get_flashed_messages() %}
     {{ flash }}
@@ -9,4 +10,6 @@
   {% endblock %}
   </body>
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="/static/ajax.js"></script>
+
 </html>
