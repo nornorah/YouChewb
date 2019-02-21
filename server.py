@@ -35,59 +35,59 @@ MOVIEDB_URL = "https://api.themoviedb.org/3/"
 def index():
     """Homepage."""
 
-    return render_template("homepage.html")
+    return render_template("index.html")
+
+@app.route('/search_recipe')
+def search_recipe():
+    """Give user the option to choose search by recipe name or by ingredients"""
+
+    return render_template("search_recipe.html")
+
+@app.route('/search_recipe_name')
+def search_by_recipe():
+    """Allow user to search for recipe by name and choose option for movie rec"""
+
+    return render_template("search_recipe_name.html")
+
+@app.route('/recipe_name_results')
+def recipe_name_results():
+    pass
+
+@app.route('/search_recipe_ingr')
+def search_by_ingredients():
+    """Allow user to search for recipe by ingredients and choose option for movie rec"""
+    
+    return render_template("search_recipe_ingredients.html")
 
 
-@app.route('/recipes')
-def recipe_results():
-    """Output of recipes user queried from putting in ingredients"""
+@app.route('/recipe_ingr_results')
+def recipe_ingr_results():
 
-    # search = request.args.get('ingredients')
-    # payload = {'key': RAPIDAPI_KEY,
-    #             'q': search,
-    #             'sort': 'r'}
-   
-    # headers = {"X-RapidAPI-Key" : RAPIDAPI_TOKEN}
+    search = request.args.get("ingredients")
+    dietary = request.args.get("dietary")
+    health = request.args.getlist("health")
 
-    # response = requests.get("https://community-food2fork.p.rapidapi.com/search", 
-    #                         params=payload, headers=headers)
+    health = ", ".join(health)
 
-    # data = response.json()
-    # recipes = data['recipes']
+    payload = {'q': search, 'app_id': EDAMAM_ID, 'app_key': EDAMAM_KEY}
 
-    # ingredient_search = search.split(", ")
-    # print(ingredient_search)
-
-    # recipe_data = []
-    # for recipe in recipes:
-    #     rId = recipe['recipe_id']
-    #     payload_get = {'key': "8b50ec6830e40ad83082a5b276c51a39",
-    #                     'rId': rId}
-    #     response = requests.get("https://community-food2fork.p.rapidapi.com/get", 
-    #                         params=payload_get, headers=headers)
-    #     data = response.json()
-    #     ingredients = data['recipe']['ingredients']
-    #     print(ingredients)
+    if (dietary and health):
+        payload['diet'] = dietary
+        payload['health'] = health
+    elif dietary:
+        payload['diet'] = dietary
+    elif health:
+        payload['health'] = health
 
 
-    # search = request.args.get('ingredients')
-    # payload = {'i': search}
-    # response = requests.get("http://www.recipepuppy.com/api/", params=payload)
-    # data = response.json()
-    # print(data)
-    # recipes = data['results']
-
-    search = request.args.get('ingredients')
-    payload = {'q': search,'app_id': EDAMAM_ID, 'app_key': EDAMAM_KEY}
     response = requests.get("https://api.edamam.com/search", params=payload)
 
     data = response.json()
     recipe_results = data['hits']
-    recipes =  {recipe['recipe'] for recipe in recipe_results}
+    recipes =  [ recipe['recipe'] for recipe in recipe_results ]
     ingredients = [ recipe['ingredientLines'] for recipe in recipes ]
-    print(ingredients)
 
-    return render_template("recipe_results.html", recipes=recipes)
+    return render_template("recipe_ingr_results.html", recipes=recipes)
 
 
 @app.route('/movies')
@@ -116,18 +116,19 @@ def movie_results():
 
     return render_template("movie_recc_results.html", movie_data=movie_data[0])
 
-@app.route('/tv_shows')
-def tv_show_results():
-    """Output of TV show recommendations from the TV show title user queried"""
 
-    tv_show_query = request.args.get('tv')
-
-
-@app.route('/save_recipe')
-def save_recipe():
+@app.route('/save_recipe/<recipe_id>')
+def save_recipe(recipe_id):
     """Save recipe to user's database of recipes"""
 
-    recipe = request.args.get()
+    if session['user_id']:
+
+
+    return render_template("update_profile_form.html")
+
+@app.route('/save_to_activity/<recipe_id>')
+def save_to_activity(recipe_id):
+
 
 @app.route('/login', methods=['GET'])
 def login_form():
@@ -154,9 +155,18 @@ def login_process():
         flash("Incorrect password")
         return redirect("/login")
 
-    session["user_id"] = user.user_id
+    session["user_id"] = user.user_id #set session of user as their user_id in database
 
     flash("Logged in")
+    return redirect("/")
+
+
+@app.route('/logout')
+def logout():
+    """Log out."""
+
+    del session["user_id"]
+    flash("Logged Out.")
     return redirect("/")
 
 
@@ -174,24 +184,42 @@ def register_process():
     # Get form variables
     email = request.form.get("email")
     password = request.form.get("password")
-    name = request.form.get("name")
-    age = int(request.form.get("age"))
-    zipcode = request.form.get("zipcode")
+    first_name = request.form.get("fname")
+    last_name = request.form.get("lname")
 
     # Add the new user to the database
     user = User.query.filter_by(email=email).first()
 
     if not user:
-        new_user = User(email=email, password=password, name=name, 
-                        age=age, zipcode=zipcode)
+        new_user = User(email=email, password=password, fname=first_name, 
+                        lname=last_name)
         db.session.add(new_user)
         db.session.commit()
     else:
         flash("This email is already in use, please try logging in!")
         redirect("/login")
 
-    flash(f"Thank you for registering, {name}")
+    flash(f"Thank you for registering, {first_name}")
     return redirect("/login")
+
+@app.route('/update_profile', methods=['GET'])
+def update_profile_form():
+    """Show form for updating user profile."""
+    print(session["user_id"])
+    if not session["user_id"]:
+        flash("Please log in")
+        return redirect("/login")
+    else:
+        return render_template("update_profile_form.html")
+
+@app.route('/update_profile', methods=['POST'])
+def update_profile_process():
+    """Process update profile form."""
+
+
+
+
+
 
 
 if __name__ == "__main__":

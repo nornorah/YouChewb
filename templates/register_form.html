@@ -4,15 +4,24 @@
   <h2>Registration Form</h2>
 
   <form action="/register" method="POST">
-    Email: <input type="text" name="email"></input>
+
+    Email: <input type="email" name="email" required></input>
     <br>
-    Password: <input type="password" name="password"></input>
+
+    Password: <input type="password" name="password" required></input>
     <br>
-    Name: <input type="text" name="name"></input>
+
+    First Name: <input type="text" name="fname" required></input>
     <br>
-    Age: <input type="text" name="age"></input>
+
+    Last Name: <input type="text" name="lname" required></input>
     <br>
-      <input type="submit" value="Submit"></input>
+
+    <input type="submit" value="Submit"></input>
+    
   </form>
 
 {% endblock %}
+
+
+

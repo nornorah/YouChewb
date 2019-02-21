@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<body>
+
+    <form action="/search_recipe_name" method="GET">
+        <input type="submit" value="Search by Recipe Name" name="search_recipe_name"></input>
+    </form> 
+
+
+    <form action="/search_recipe_ingr" method="GET">
+        <input type="submit" value="Search by Ingredients" name="search_ingredients"></input>
+    </form>
+
+
+
+    <form action="/logout" method="GET">
+        <input type="submit" value="Log Out" name="logout"></input>
+    </form>
+
+
+</body>
+
+
+{% endblock %}
+
+<!-- 
+    <form action="/movies" method="GET">
+        Movie Title: <input type="text" name="movie" placeholder="Get Movie Recommendation"></input>
+        <br>
+            <input type="submit" value="Search" name="search_movie"></input>
+        <br>
+    </form> -->

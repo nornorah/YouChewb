@@ -3,18 +3,30 @@
 {% block content %}
 
       <h2>Recipes</h2>
+
       <ul class="recipes">
+
         {% for recipe in recipes %}
+
           <li> <a href="{{ recipe['url'] }}">
           <img src="{{ recipe['image'] }}"></a> 
           <br>
           {{ recipe['label'] }}
           <br>
           {{ recipe['ingredientLines']}}
+          {% set recipe_id = recipe['uri'][-32:] %}
+                <form action="/save_recipe/{{ recipe_id }}">
+                  <input type="submit" value="Save Recipe">
+                </form>
+
+                <form action="/save_to_activity/{{ recipe_id }}">
+                  <input type="submit" value="Tonight's Menu">
+                </form>
 
         {% endfor %}
+
           </li>
-          <br>
+
       </ul>
 
 {% endblock %}

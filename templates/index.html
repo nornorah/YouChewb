@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    <form action="/search_recipe" method="GET">
+        <input type="submit" value="Staying In" name="stay_in"></input>
+    </form>
+    <br>
+
+    <form action="/search_restaurant" method="GET">
+        <input type="submit" value="Going Out" name="going_out"></input>
+    </form>
+    <br>
+
+    <form action="/login" method="GET">
+        <input type="submit" value="Log In" name="login"></input>
+    </form>
+    <br>
+
+    <form action="/register" method="GET">
+        <input type="submit" value="Register">
+    </form>
+
+
+{% endblock %}

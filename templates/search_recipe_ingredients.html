@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <form action="/recipe_ingr_results" method="GET">
+
+        <input type="text" placeholder="Ingredients" name="ingredients"></input>
+        <br>
+        Filter by: 
+        <br>
+        <input type="checkbox" name="dietary" value="balanced">Balanced Dietary Values
+        <input type="checkbox" name="health" value="peanut-free">Peanut Free
+        <input type="checkbox" name="health" value="soy-free">Soy Free
+        <input type="checkbox" name="health" value="shellfish-free">Shellfish Free
+        <br>
+        <input type="checkbox" name="health" value="vegan">Vegan
+        <input type="checkbox" name="health" value="vegetarian">Vegetarian
+        <input type="checkbox" name="health" value="pescatarian">Pescatarian
+        <br>
+        <input type="submit" value="Give Me a Random Movie Recommendation" name="random_movie"></input>
+
+    </form> 
+
+
+    <form action="/add_movies" method="GET">
+
+        <input type="submit" value="Give Me Recommendations Based On Movies I Liked" name="add_movies"></input>
+
+    </form>
+
+
+{% endblock %}

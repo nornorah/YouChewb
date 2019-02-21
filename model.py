@@ -20,11 +20,10 @@ class User(db.Model):
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     email = db.Column(db.String(50), nullable=False)
     password = db.Column(db.String(50), nullable=False)
-    name = db.Column(db.String(50), nullable=False)
-    age = db.Column(db.Integer, nullable=True)
-    food_allergy = db.Column(db.String(50), nullable=True)
-    favorite_movie = db.Column(db.String(50), nullable=True)
-    watched_movie = db.Column(db.String(50), nullable=True)
+    fname = db.Column(db.String(50), nullable=False)
+    lname = db.Column(db.String(50), nullable=False)
+
+    recipe = db.relationship("Recipe", backref="users")
 
 
     def __repr__(self):
@@ -32,6 +31,22 @@ class User(db.Model):
         
         return f"<User user_id={self.user_id} email={self.email}>"
 
+
+class Recipe(db.Model):
+    """Recipe user saved"""
+
+    __tablename__ = "recipes"
+
+    entry_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    recipe_id = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
+
+
+    def __repr__(self):
+        """Provide helpful representation when printed."""
+        
+        return f"<Recipe entry_id={self.entry_id} user_id={self.user_id} name={self.name}>"
 
 
 

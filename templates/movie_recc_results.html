@@ -3,7 +3,9 @@
 {% block content %}
 
       <h2>Movie Recommendations</h2>
+
       <ul class="movies">
+        
         {% for movie in movie_data %}
           <li>
           <a href="https://www.themoviedb.org/movie/{{ movie['id'] }}">
