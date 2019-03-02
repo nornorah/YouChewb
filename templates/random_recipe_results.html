@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% set recipe_url = recipe['url'] %}
+{% set recipe_image = recipe['image'] %}
+{% set recipe_name = recipe['label'] %}
+{% set recipe_id = recipe['uri'][-32:] %}
+
+        <a href="{{ recipe_url }}">
+        <img src="{{ recipe_image }}"></a> 
+          <br>
+          {{ recipe_name }}
+          <br>
+
+        <input type="checkbox" name="dietary" value="balanced">Balanced Diet</input>
+        <input type="checkbox" name="dietary" value="low-carb">Low Carb Diet</input>
+        <br>
+        <input type="checkbox" name="health" value="peanut-free">Peanut Free</input>
+        <input type="checkbox" name="health" value="alcohol-free">Alcohol Free</input>
+        <br>
+        <input type="checkbox" name="health" value="vegan">Vegan</input>
+        <input type="checkbox" name="health" value="vegetarian">Vegetarian</input>
+        <br>
+
+
+        <form action="/display_random_recipe">
+          <input type="submit" value="I Don't Like This - Show Me Another One">
+        </form>
+
+        <form action="/get_random_movie">
+          <input type="submit" value="Cool - Show Me a Random Movie to Watch"></input>
+          <input type="hidden" name="recipe" value="{{ recipe_url, recipe_image, recipe_name, recipe_id }}"></input>
+        <br>
+
+        Filter Movie By Genre: 
+        <br>
+        <input type="checkbox" name="genre" value="action">Action</input>
+        <input type="checkbox" name="genre" value="adventure">Adventure</input>
+        <input type="checkbox" name="genre" value="animation">Animation</input>
+        <br>
+        <input type="checkbox" name="genre" value="comedy">Comedy</input>
+        <input type="checkbox" name="genre" value="crime">Crime</input>
+        <input type="checkbox" name="genre" value="documentary">Documentary</input>
+        <br>
+        <input type="checkbox" name="genre" value="drama">Drama</input>
+        <input type="checkbox" name="genre" value="family">Family</input>
+        <input type="checkbox" name="genre" value="fantasy">Fantasy</input>
+        <br>
+        <input type="checkbox" name="genre" value="history">History</input>
+        <input type="checkbox" name="genre" value="horror">Horror</input>
+        <br>
+        <input type="checkbox" name="genre" value="mystery">Mystery</input>
+        <input type="checkbox" name="genre" value="romance">Romance</input>
+        <input type="checkbox" name="genre" value="science fiction">Science Fiction</input>
+        <br>
+        <input type="checkbox" name="genre" value="thriller">Thriller</input>
+        <input type="checkbox" name="genre" value="war">War</input>
+        <br>
+
+        Filter By Year Released:
+        <br>
+        <input type="radio" name="year" value="1960">Released after 1960</input>
+        <input type="radio" name="year" value="1970">Released after 1970</input>
+        <input type="radio" name="year" value="1980">Released after 1980</input>
+        <br>
+        <input type="radio" name="year" value="1990">Released after 1990</input>
+        <input type="radio" name="year" value="2000">Released after 2000</input>
+        <input type="radio" name="year" value="2010">Released after 2010</input>
+        </form>
+
+
+{% endblock %}

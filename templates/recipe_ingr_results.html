@@ -2,31 +2,32 @@
 
 {% block content %}
 
+
+{% set recipe_url = recipe['url'] %}
+{% set recipe_image = recipe['image'] %}
+{% set recipe_name = recipe['label'] %}
+{% set recipe_id = recipe['uri'][-32:] %}
+
       <h2>Recipes</h2>
 
       <ul class="recipes">
 
         {% for recipe in recipes %}
 
-          <li> <a href="{{ recipe['url'] }}">
-          <img src="{{ recipe['image'] }}"></a> 
+          <li> <a href="{{ recipe_url }}">
+          <img src="{{ recipe_image }}"></a> 
           <br>
-          {{ recipe['label'] }}
+          {{ recipe_name }}
           <br>
-          {{ recipe['ingredientLines']}}
-          {% set recipe_id = recipe['uri'][-32:] %}
-                <form action="/save_recipe/{{ recipe_id }}">
-                  <input type="submit" value="Save Recipe">
+                <form action="/choose_recipe/">
+                  <input type="submit" value="Choose This Recipe and Get a Movie Recommendation">
                 </form>
-
-                <form action="/save_to_activity/{{ recipe_id }}">
-                  <input type="submit" value="Tonight's Menu">
-                </form>
-
+          <br>
         {% endfor %}
 
           </li>
 
       </ul>
+
 
 {% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% set movie_url = "https://www.themoviedb.org/movie/", movie['id'] %}
+{% set movie_image = "https://image.tmdb.org/t/p/w500/", movie['poster_path'] %}
+{% set movie_name = movie['title'] %}
+{% set movie_id = movie['id'] %}
+{% set movie_overview = movie['overview'] %}
+
+    <a href=movie_url><img src=movie_image></a>
+    <br>
+    movie_name
+    <br>
+    movie_overview
+    <br>
+
+    <form action="/get_random_movie">
+      <input type="submit" value="I Don't Like This - Show Me Another One">
+    </form>
+    <br>
+    <form action="/display_activity">
+      <input type="submit" value="Cool - I'm Done Picking"></input>
+      <input type="hidden" name="movie" value="{{ movie_url, movie_image, movie_name, movie_id }}"></input>
+    </form>
+
+{% endblock %}

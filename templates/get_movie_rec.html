@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form action="/display_movie_rec" method="GET">
+
+        <input type="text" placeholder="Search by Movie Title" name="movie"></input>
+        <br>
+        <input type="submit" value="Search" name="search_by_title"></input>
+
+{% endblock %}

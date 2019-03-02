@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <form action="/display_ingr_results" method="GET">
+
+        <input type="text" placeholder="Ingredients" name="ingredients"></input>
+        <br>
+        Filter by: 
+        <br>
+        <input type="checkbox" name="dietary" value="balanced">Balanced Diet</input>
+        <input type="checkbox" name="dietary" value="low-carb">Low Carb Diet</input>
+        <br>
+        <input type="checkbox" name="health" value="peanut-free">Peanut Free</input>
+        <input type="checkbox" name="health" value="alcohol-free">Alcohol Free</input>
+        <br>
+        <input type="checkbox" name="health" value="vegan">Vegan</input>
+        <input type="checkbox" name="health" value="vegetarian">Vegetarian</input>
+        <br>
+        <input type="submit" value="Show Me Recipes" name="search_by_ingr"></input>
+
+    </form> 
+
+
+{% endblock %}

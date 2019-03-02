@@ -23,8 +23,7 @@ class User(db.Model):
     fname = db.Column(db.String(50), nullable=False)
     lname = db.Column(db.String(50), nullable=False)
 
-    recipe = db.relationship("Recipe", backref="users")
-
+    activity = db.relationship("Activity", backref="users")
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -33,20 +32,56 @@ class User(db.Model):
 
 
 class Recipe(db.Model):
-    """Recipe user saved"""
+    """Recipe info"""
 
     __tablename__ = "recipes"
 
-    entry_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    recipe_id = db.Column(db.Integer, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-    name = db.Column(db.String(100), nullable=False)
+    recipe_id = db.Column(db.String(50), primary_key=True)
+    recipe_url = db.Column(db.String(500), nullable=False)
+    recipe_image = db.Column(db.String(500), nullable=False)
+    recipe_name = db.Column(db.String(100), nullable=False)
+
+    def __repr__(self):
+        """Provide helpful representation when printed."""
+        
+        return f"<Recipe recipe_id={self.recipe_id} recipe_name={self.recipe_name}>"
+
+
+class Movie(db.Model):
+    """Movie info"""
+
+    __tablename__ = "movies"
+
+    movie_id = db.Column(db.Integer, primary_key=True)
+    movie_url = db.Column(db.String(500), nullable=False)
+    movie_image = db.Column(db.String(500), nullable=False)
+    movie_name = db.Column(db.String(100), nullable=False)    
 
 
     def __repr__(self):
         """Provide helpful representation when printed."""
         
-        return f"<Recipe entry_id={self.entry_id} user_id={self.user_id} name={self.name}>"
+        return f"<Movie movie_id={self.movie_id} movie_name={self.movie_name}>"
+
+
+class Activity(db.Model):
+    """Activity log for a user"""
+
+    __tablename__ = "activities"
+
+    entry_id = (db.Column(db.Integer, autoincrement=True, primary_key=True))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)    
+    recipe_id = db.Column(db.String(50), db.ForeignKey('recipes.recipe_id'), nullable=False) 
+    movie_id = db.Column(db.Integer, db.ForeignKey('movies.movie_id'), nullable=False) 
+    date = db.Column(db.String(30), nullable=False)
+
+    def __repr__(self):
+        """Provide helpful representation when printed."""
+        
+        return f"<Activity entry_id={self.entry_id} user_id={self.user_id} date={self.date}>"
+
+
+
 
 
 
