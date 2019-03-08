@@ -2,23 +2,61 @@
 
 {% block content %}
 
-{% set movie_url = "https://www.themoviedb.org/movie/", movie['id'] %}
-{% set movie_image = "https://image.tmdb.org/t/p/w500/", movie['poster_path'] %}
+{% set movie_url = "https://www.themoviedb.org/movie/"+movie['id']|string %}
+{% set movie_image = "https://image.tmdb.org/t/p/w500/"+movie['poster_path'] %}
 {% set movie_name = movie['title'] %}
 {% set movie_id = movie['id'] %}
 {% set movie_overview = movie['overview'] %}
 
-    <a href=movie_url><img src=movie_image></a>
+    <a href="{{ movie_url }}"><img src="{{ movie_image }}"></a>
     <br>
-    movie_name
+    {{ movie_name }}   
     <br>
-    movie_overview
+    {{ movie_overview }}
+    <br>
     <br>
 
     <form action="/get_random_movie">
-      <input type="submit" value="I Don't Like This - Show Me Another One">
-    </form>
+
+    Filter Movie By Genre: 
     <br>
+    <input type="checkbox" name="genre" value="action">Action</input>
+    <input type="checkbox" name="genre" value="adventure">Adventure</input>
+    <input type="checkbox" name="genre" value="animation">Animation</input>
+    <br>
+    <input type="checkbox" name="genre" value="comedy">Comedy</input>
+    <input type="checkbox" name="genre" value="crime">Crime</input>
+    <input type="checkbox" name="genre" value="documentary">Documentary</input>
+    <br>
+    <input type="checkbox" name="genre" value="drama">Drama</input>
+    <input type="checkbox" name="genre" value="family">Family</input>
+    <input type="checkbox" name="genre" value="fantasy">Fantasy</input>
+    <br>
+    <input type="checkbox" name="genre" value="history">History</input>
+    <input type="checkbox" name="genre" value="horror">Horror</input>
+    <br>
+    <input type="checkbox" name="genre" value="mystery">Mystery</input>
+    <input type="checkbox" name="genre" value="romance">Romance</input>
+    <input type="checkbox" name="genre" value="science fiction">Science Fiction</input>
+    <br>
+    <input type="checkbox" name="genre" value="thriller">Thriller</input>
+    <input type="checkbox" name="genre" value="war">War</input>
+    <br>
+
+    Filter By Year Released:
+    <br>
+    <input type="radio" name="year" value="1960">Released after 1960</input>
+    <input type="radio" name="year" value="1970">Released after 1970</input>
+    <input type="radio" name="year" value="1980">Released after 1980</input>
+    <br>
+    <input type="radio" name="year" value="1990">Released after 1990</input>
+    <input type="radio" name="year" value="2000">Released after 2000</input>
+    <input type="radio" name="year" value="2010">Released after 2010</input>
+
+    <br>
+      <input type="submit" value="I Don't Like This - Show Me Another One" name="new-random-movie"></input>
+    </form>
+
     <form action="/display_activity">
       <input type="submit" value="Cool - I'm Done Picking"></input>
       <input type="hidden" name="movie" value="{{ movie_url, movie_image, movie_name, movie_id }}"></input>

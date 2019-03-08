@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for recipe in recipes %}
+    {% set recipe_url = recipe['url'] %}
+    {% set recipe_image = recipe['image'] %}
+    {% set recipe_name = recipe['label'] %}
+    {% set recipe_id = recipe['uri'][-32:] %}
+
+      <li> <a href="{{ recipe_url }}">
+      <img src="{{ recipe_image }}"></a> 
+      <br>
+      {{ recipe_name }}
+      <br>
+{% endfor %}
+
+{% endblock %}

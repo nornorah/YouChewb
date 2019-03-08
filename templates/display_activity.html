@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <a href="{{ recipe.recipe_url }}">
+    <img src="{{ recipe.recipe_image }}"></a>
+    <br>
+    {{ recipe.recipe_name }}
+    <br> 
+    <a href="{{ movie.movie_url }}"><img src="{{ movie.movie_image }}"></a>
+    <br>
+    {{ movie.movie_name }}
+    <br>
+    <a href="https://www.youtube.com/watch?v={{ video }}"><img src="https://www.capebretonpost.com/media/photologue/photos/cache/sw-web-09042018-youtube_logo_large.jpg"></a>Watch on YouTube
+    <br>
+    <form action="/save_activity">
+        <input type="submit" value="Save This Activity and Browse Random Recipes">
+    </form>
+    <br>
+
+
+
+{% endblock %}
