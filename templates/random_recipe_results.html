@@ -2,38 +2,134 @@
 
 {% block content %}
 
-{% set recipe_url = recipe['url'] %}
-{% set recipe_image = recipe['image'] %}
-{% set recipe_name = recipe['label'] %}
-{% set recipe_id = recipe['uri'][-32:] %}
         
+        <a href="{{ recipe['url'] }}" id="recipe-url" target="_blank">
+        <img src="{{ recipe['image'] }}" id="recipe-img"></a> 
+          <br>
+      <div id="recipe-name">
+          {{ recipe['label'] }}
+      </div>
+      <br>
+      You'll Need:
+      <div id="recipe-ingredients">
+        {{ '; '.join(recipe['ingredientLines']) }}
+        <br>
+      </div>
+      <br>
+      <div id="happy-recipe">
+      Want to Chewse This?
+      <br>
+          <button class="happy-button" id="recipe-yes" value="yes">Yes - Give Me a Movie Recommendation</button>
+          <br>
+          <button class="happy-button" id="recipe-no" value="no">No - Give Me Other Choices</button>
+      </div> 
+
+      <div id="dietary" style="display:none">
+          Dietary Preference?
+          <br>
+          <button class="dietary" id="dietary1" value="balanced">Balanced</button>  
+          <button class="dietary" id="dietary2" value="low-carb">Low-Carb</button>
+          <br>
+          <button class="dietary" id="dietary3" value="low-fat">Low-Fat</button>
+          <button class="dietary" id="dietary4">No Preference</button>            
+      </div>
+
+      <div id="peanut" style="display:none">
+        Peanut Allergies?
+          <button class="peanut" id="dietary5" value="peanut-free">Yes</button>  
+          <button class="peanut" id="dietary6">No</button>
+      </div>    
+
+      <div id="vege" style="display:none">
+          Vegetarian?
+          <button class="vege" id="health1" value="vegetarian">Yes</button>
+          <button class="vege" id="health2">No</button>
+      </div>  
+
+      <div id="submit-button-recipe" style="display:none">
+          <input type="submit" value="Filter and Get a New Recipe" id="new-random-recipe">
+      </div>
+          <br>  
+
+        <br>
+
+        {% set movie_url = "https://www.themoviedb.org/movie/"+movie['id']|string %}
+        {% set movie_image = "https://image.tmdb.org/t/p/w500/"+movie['poster_path'] %}
+
+    <div id="movie" style="display:none">
+          <a href="{{ movie_url }}" id="movie-url" target="_blank">
+            <img src="{{ movie_image }}" id="movie-img"></a>
+          <br>
+        <div id="movie-name">
+          {{ movie['title'] }} 
+        </div>  
+        <br>
+        Synopsis:
+        <div id="movie-overview">
+        <br>
+        {{ movie['overview'] }}
+        <br>
+      </div>
+  <br>
+      <div id="happy-movie">
+      Want to Chewse This?
+      <br>
+          <button class="happy-movie-button" id="movie-yes" value="yes">Yes - Give Me the YouTube Link</button>
+          <br>
+          <button class="happy-movie-button" id="movie-no" value="no">No - Give Me Other Choices</button>
+      </div> 
+
+        <br>
+</div>
+    <div id="genre-checkbox" style="display:none">
+    Filter by Genre?
+    <br>
+      <input type="checkbox" class="genre" value="action">Action</input>
+      <input type="checkbox" class="genre" value="adventure">Adventure</input>
+      <input type="checkbox" class="genre" value="animation">Animation</input>
+      <input type="checkbox" class="genre" value="comedy">Comedy</input>
+      <br>
+      <input type="checkbox" class="genre" value="crime">Crime</input>
+      <input type="checkbox" class="genre" value="documentary">Documentary</input>
+      <input type="checkbox" class="genre" value="drama">Drama</input>
+      <input type="checkbox" class="genre" value="family">Family</input>
+      <br>
+      <input type="checkbox" class="genre" value="fantasy">Fantasy</input>
+      <input type="checkbox" class="genre" value="war">War</input>
+      <input type="checkbox" class="genre" value="horror">Horror</input>
+      <input type="checkbox" class="genre" value="mystery">Mystery</input>
+      <br>
+      <input type="checkbox" class="genre" value="romance">Romance</input>
+      <input type="checkbox" class="genre" value="science fiction">Sci-Fi</input>
+      <input type="checkbox" class="genre" value="thriller">Thriller</input>      
+      <input type="checkbox" class="genre" value="history">History</input>  
+      <br>
+    </div>
+    <br>
+    <div id="year-radio" style="display:none">
+        Filter by Year Released?
+        <br>
+        <input type="radio" class="year" value="1970" name="year">Released after 1970</input>
+        <input type="radio" class="year" value="1980" name="year">Released after 1980</input>
+        <input type="radio" class="year" value="1990" name="year">Released after 1990</input>
+        <br>
+        <input type="radio" class="year" value="2000" name="year">Released after 2000</input>
+        <input type="radio" class="year" value="2010" name="year">Released after 2010</input>
+        <input type="radio" class="year" value="" name="year">No Preference</input>
+    </div>
+
+    <div id="submit-button-movie" style="display:none">
+      <input type="submit" value="Filter and Get a New Movie" id="new-random-movie">
+    </div>
         
-        <a href="{{ recipe_url }}" id="url">
-        <img src="{{ recipe_image }}" id="img"></a> 
-          <br>
-        <div id="recipe-name">
-          {{ recipe_name }}
-        </div>
-          <br>
 
-        <input type="checkbox" name="dietary" value="balanced">Balanced Diet</input>
-        <input type="checkbox" name="dietary" value="low-carb">Low Carb Diet</input>
-        <br>
-        <input type="checkbox" name="health" value="peanut-free">Peanut Free</input>
-        <input type="checkbox" name="health" value="alcohol-free">Alcohol Free</input>
-        <br>
-        <input type="checkbox" name="health" value="vegan">Vegan</input>
-        <input type="checkbox" name="health" value="vegetarian">Vegetarian</input>
-        <br>
+<div id="youtube" style="display:none">
+  <a href="" id="youtube-link" target="_blank"><input type="submit" value="Watch This Movie On YouTube"></a>
+  <form action="/save_activity">
+    <input type="submit" value="All Done - Save This Activity">
+  </form>
+</div>
 
-        <form action="/display_random_recipe">
-          <input type="submit" value="I Don't Like This - Show Me Another One" name="new-random-recipe">
-        </form>
-  <script src="/static/recipe_update.js"></script>
-        <form action="/get_random_movie">
-          <input type="submit" value="Cool - Show Me a Random Movie to Watch"></input>
-          <input type="hidden" name="recipe" value="{{ recipe_url, recipe_image, recipe_name, recipe_id }}"></input>
-        </form>
-<
+<script src="/static/recipe_update.js"></script>
 
 {% endblock %}

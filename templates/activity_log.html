@@ -3,4 +3,28 @@
 {% block content %}
 
 
+{% for date, recipe, movie in activity_info %}
+
+{{ date }}
+
+<br>
+<a href="{{ recipe.recipe_url }}" id="recipe-url" target="_blank"><img src="{{ recipe.recipe_image }}" id="recipe-img"></a> 
+<br>
+<div id="recipe-name">
+{{ recipe.recipe_name }}
+</div>
+<br>
+
+
+<a href="{{ movie.movie_url }}" id="movie-url" target="_blank">
+<img src="{{ movie.movie_image }}" id="movie-img"></a>
+<br>
+<div id="movie-name">
+{{ movie.movie_name }} 
+</div>  
+<br>
+
+
+{% endfor %}
+
 {% endblock %}

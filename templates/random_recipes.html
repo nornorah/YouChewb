@@ -2,17 +2,64 @@
 
 {% block content %}
 
+<form action="/display_recipe_search_results">
+Search by Recipe Name or Ingredients:
+    <input type="text" id="search" name="search"></input>
+    <input type="submit" id="recipe-search"></input>
+    <br>
+    Try "chicken parmesan" or "onions, shrimp" (ingredients must be separated by commas)
+    <br>
+    <br>
+<!-- Filter by:
+<br>
+Calories:
+<br>
+<select name="calories" id="calories">
+    <option disabled selected value> -- Select an Option -- </option>    
+    <option value="500">Less than 500 calories</option>
+    <option value="1000">Less than 1000 calories</option>
+    <option value="1500">Less than 1500 calories</option>
+    <option value="2000">Less than 2000 calories</option>
+    <option value="10000">Greater than 2000 calories</option>
+</select>
+<br>
+Dietary Preference:
+<br>
+<select name="dietary" id="dietary">
+    <option disabled selected value> -- Select an Option -- </option>
+    <option value="balanced">Balanced</option>
+    <option value="low-fat">Low-Fat</option>
+    <option value="low-carbs">Low-Carbs</option>
+</select>
+<br>
+Dietary Restrictions:
+<br>
+  <input type="checkbox" value="peanut-free" name="health">Peanut-Free</option>
+  <input type="checkbox" value="vegetarian" name="health">Vegetarian</option>
+</select>
+<br>
+ -->
+</form>
+
+
+
 {% for recipe in recipes %}
     {% set recipe_url = recipe['url'] %}
     {% set recipe_image = recipe['image'] %}
     {% set recipe_name = recipe['label'] %}
     {% set recipe_id = recipe['uri'][-32:] %}
+<form action="/save_recipe">
 
-      <li> <a href="{{ recipe_url }}">
+      <li> <a href="{{ recipe_url }}" target="_blank">
       <img src="{{ recipe_image }}"></a> 
-      <br>
+        <br>
       {{ recipe_name }}
-      <br>
+        <br>
+          <input type="submit" value="Chewse This and Show Me Movies to Watch">
+          <input type="hidden" name="recipe" value="{{ recipe_url, recipe_image, recipe_name, recipe_id }}"></input>
+        </li>
+</form>
+
 {% endfor %}
 
 {% endblock %}

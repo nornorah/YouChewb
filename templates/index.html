@@ -3,24 +3,27 @@
 {% block content %}
 
 <body>
-
-    <form action="/get_random_recipe" method="GET">
-        <input type="submit" value="Feelin' Real Random Today" name="search_recipe_name"></input>
+Not Sure What You Can Eat and Watch Tonight?
+<br>
+Welcome to YouChewb
+<br>
+    <form action="/display_random_recipe_and_movie" method="GET">
+        <input type="submit" value="Give Me a Random Recommendation" name="search_recipe_name"></input>
     </form> 
 
 
-    <form action="/get_recipe_ingr" method="GET">
-        <input type="submit" value="Feelin' Real Controlling Today" name="search_ingredients"></input>
+    <form action="/display_random_recipes" method="GET">
+        <input type="submit" value="Give Me Some Options" name="search_ingredients"></input>
     </form>
     
     <br>
 
-    <form action="/login" method="GET">
-        <input type="submit" value="Log In" name="login"></input>
-    </form>
-
     <form action="/register" method="GET">
         <input type="submit" value="Register">
+    </form>
+
+    <form action="/login" method="GET">
+        <input type="submit" value="Log In" name="login"></input>
     </form>
 
     <form action="/logout" method="GET">

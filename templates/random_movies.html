@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+Get a Recommendation by:
+<br>
+<button class="movie-title-search" value="movie-title-search">
+Typing in a Movie Title</button>
+<div id="movie-title" style="display:none">
+    <form action="/display_movie_rec_by_search">
+
+    <input type="text" id="search" name="search"></input>
+    <input type="submit" id="movie-search"></input>
+</div>
+</form>
+<!-- <button class="movie-filter-search" value="filters">
+Filters
+</button>
+    <br>
+<form action="/display_movie_rec_by_filters">
+<div id="movie-filter" style="display:none">
+
+    Genre:
+      <input type="checkbox" class="genre" value="action" name="genre">Action</input>
+      <input type="checkbox" class="genre" value="adventure" name="genre">Adventure</input>
+      <input type="checkbox" class="genre" value="animation" name="genre">Animation</input>
+      <input type="checkbox" class="genre" value="comedy" name="genre">Comedy</input>
+      <br>
+      <input type="checkbox" class="genre" value="crime" name="genre">Crime</input>
+      <input type="checkbox" class="genre" value="documentary" name="genre">Documentary</input>
+      <input type="checkbox" class="genre" value="drama" name="genre">Drama</input>
+      <input type="checkbox" class="genre" value="family" name="genre">Family</input>
+      <br>
+      <input type="checkbox" class="genre" value="fantasy" name="genre">Fantasy</input>
+      <input type="checkbox" class="genre" value="war" name="genre">War</input>
+      <input type="checkbox" class="genre" value="horror" name="genre">Horror</input>
+      <input type="checkbox" class="genre" value="mystery" name="genre">Mystery</input>
+      <br>
+      <input type="checkbox" class="genre" value="romance" name="genre">Romance</input>
+      <input type="checkbox" class="genre" value="science fiction" name="genre">Sci-Fi</input>
+      <input type="checkbox" class="genre" value="thriller" name="genre">Thriller</input>      
+      <input type="checkbox" class="genre" value="history" name="genre">History</input>  
+      <br>
+        Year Released:
+        <br>
+        <input type="radio" class="year" value="1970" name="year">Released after 1970</input>
+        <input type="radio" class="year" value="1980" name="year">Released after 1980</input>
+        <input type="radio" class="year" value="1990" name="year">Released after 1990</input>
+        <br>
+        <input type="radio" class="year" value="2000" name="year">Released after 2000</input>
+        <input type="radio" class="year" value="2010" name="year">Released after 2010</input>
+        <br>
+        <input type="submit" id="movie-search"></input>
+
+</div> -->
+</form>
+
+
+        {% for movie in movies %}
+
+        {% set movie_url = "https://www.themoviedb.org/movie/"+movie['id']|string %}
+        {% set movie_image = "https://image.tmdb.org/t/p/w500/"+movie['poster_path'] %}
+        {% set movie_name = movie['title'] %}
+        {% set movie_id = movie['id'] %}
+        {% set movie_overview = movie['overview'] %}
+          <form action="/display_activity">
+
+          <li>
+          <a href="{{ movie_url }}">
+            <img src="{{ movie_image }}">
+          </a>
+          <br>
+          <div id="movie-name">
+          {{ movie_name }}
+          </div>
+          <br>
+          {{ movie_overview }}
+          </li>
+          <input type="submit" value="Chewse This Movie" id="choose-movie">
+        <input type="hidden" name="movie" value="{{ movie_url, movie_image, movie_name, movie_id }}"></input>
+        </form>
+        <a href="" id="youtube-link" target="_blank"><button class="youtube" style="display:none">Watch This Movie on YouTube</button></a>
+
+        <br>
+      </ul>
+      {% endfor %}
+
+<script src="/static/movie_update.js"></script>
+
+{% endblock %}
+
