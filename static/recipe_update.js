@@ -1,20 +1,19 @@
 "use strict";
 
-
-function getGenre(){
+$(document).ready(function() {
+    function getGenre(){
     let genreArray = [];
     $(".genre:checked").each(function() {
         genreArray.push($(this).val());
     });
     return genreArray
-};
+    };
 
- let dietary = null;
- let peanut = null;
- let vegetarian = null;
- let health = [];
+    let dietary = null;
+    let peanut = null;
+    let vegetarian = null;
+    let health = [];
 
-$(document).ready(function() {
 
     $("#recipe-no").click( function() {
         $("#dietary").show();
@@ -79,6 +78,8 @@ $(document).ready(function() {
 
     let genre = null;
     let year = null;
+    // let gte = null;
+    // let lte = null;
 
     $("#movie-no").click(function() {
         $("#genre-checkbox").show();
@@ -90,32 +91,27 @@ $(document).ready(function() {
     });
 
     $(".year").click(function() {
-        year = $(this).val();
-        $("#submit-button-movie").show()
+        $("#submit-button-movie").show();
     });
 
     $('#new-random-movie').click(function() {
         
         let formData = {};
 
-        if (genre && year){
-            formData = {
-            'with_genres': genre,
-            'release_date.gte': year
-            };
+        if (genre){
+            formData['with_genres'] = genre
+        };
+        if (gte){
+            formData['release_date.gte'] = $('#gte').val()
+        }; 
 
-        } else if (year){
-            formData = {
-            'release_date.gte': year
-            };
+        if (lte){
+            formData['release_date.lte'] = $('#lte').val()
+        };         
 
-        } else if (genre){
-            formData = {
-            'with_genres': genre
-            };
-        }
         console.log(formData)
         $.get('/get_random_movie', formData, (results) => {
+            console.log(results)
             $('#movie-url').attr('href', "https://www.themoviedb.org/movie/"+results.id);
             $('#movie-img').attr('src', "https://image.tmdb.org/t/p/w500/"+results.poster_path);
             $('#movie-name').html(results.title);

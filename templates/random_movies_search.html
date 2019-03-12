@@ -42,12 +42,14 @@ Filters
       <br>
         Year Released:
         <br>
-        <input type="radio" class="year" value="1970" name="year">Released after 1970</input>
+<!--         <input type="radio" class="year" value="1970" name="year">Released after 1970</input>
         <input type="radio" class="year" value="1980" name="year">Released after 1980</input>
         <input type="radio" class="year" value="1990" name="year">Released after 1990</input>
         <br>
         <input type="radio" class="year" value="2000" name="year">Released after 2000</input>
-        <input type="radio" class="year" value="2010" name="year">Released after 2010</input>
+        <input type="radio" class="year" value="2010" name="year">Released after 2010</input> -->
+        <input type="text" id="gte" placeholder="Released after" class="year" name="gte">
+        <input type="text" id="lte" placeholder="Released before" class="year" name="lte">        
         <br>
         <input type="submit" id="movie-search"></input>
 
@@ -57,15 +59,18 @@ Filters
 
         {% for movie in movies %}
 
-        {% set movie_url = "https://www.themoviedb.org/movie/"+movie['id']|string %}
+        {% set movie_url = "https://www.themoviedb.org/movie/"+movie['id']|string %}        
+        {% if movie['poster_path'] %}
         {% set movie_image = "https://image.tmdb.org/t/p/w500/"+movie['poster_path'] %}
+        {% else %}
+        {% set movie_image = "https://anest.ufl.edu/files/2015/04/No_image_available.jpg" %}
+        {% endif %}
         {% set movie_name = movie['title'] %}
         {% set movie_id = movie['id'] %}
         {% set movie_overview = movie['overview'] %}
-        
+
           <form action="/save_movie_activity">
 
-          <li>
           <a href="{{ movie_url }}">
             <img src="{{ movie_image }}">
           </a>
@@ -75,11 +80,12 @@ Filters
           </div>
           <br>
           {{ movie_overview }}
-          </li>
+
           <input type="submit" value="Chewse This Movie" id="choose-movie">
         <input type="hidden" name="movie" value="{{ movie_url, movie_image, movie_name, movie_id }}"></input>
-        <a href="" id="youtube-link" target="_blank"><button class="youtube" style="display:none">Watch This Movie on YouTube</button></a>
         </form>
+        <a href="" id="youtube-link"><input type="submit" value="Watch This Movie On YouTube" style="display:none" id="youtube"></a>
+
 
         <br>
       </ul>

@@ -43,7 +43,6 @@ MOVIEDB_URL = "https://api.themoviedb.org/3/"
 def get_edamam_payload():
     """Helper function to get payload backbone for edamam API request"""
 
-
     dietary = request.args.get("dietary")
     health = request.args.getlist("health[]")
 
@@ -75,7 +74,7 @@ def request_edamam_api(payload):
     return recipes
 
 
-def get_movie_payload():
+def get_movie_payload(genres=[], gte='', lte=''):
     """Helper function to build payload backbone with genre and year info for movies"""
 
     genre_dict = {'action': 28, 'adventure': 12, 'animation': 16, 
@@ -84,9 +83,6 @@ def get_movie_payload():
                 'history': 36, 'horror': 27, 'music': 10402,
                 'mystery': 9648, 'romance': 10749, 'science fiction': 878,
                 'thriller': 53, 'war': 10752, 'western': 37}
-
-    genres = request.args.getlist("with_genres[]")
-    year = request.args.get("release_date.gte")
     
     genre = [ str(genre_dict[genre]) for genre in genres ]
     genre = ','.join(genre)
@@ -95,9 +91,10 @@ def get_movie_payload():
 
     if genre:
         payload.update({'with_genres': genre})
-    if year:
-        payload.update({'release_date.gte': year})
-
+    if gte:
+        payload.update({'release_date.gte': gte})
+    if lte:
+        payload.update({'release_date.lte': lte})
     return payload
 
 
@@ -161,7 +158,7 @@ def index():
 @app.route('/display_random_recipe_and_movie', methods=['GET'])
 def display_random_recipe_and_movie():
     """Display random recipes from edamam API call"""
-###from 
+### FROM index.html
 
     payload = get_edamam_payload()
     recipes = request_edamam_api(payload)
@@ -175,16 +172,16 @@ def display_random_recipe_and_movie():
     movie = request_movie_api(payload)
     save_movie_info(movie)
 
-    return render_template("random_recipe_results.html", recipe=recipe, movie=movie)
+    return render_template("random_recipe_and_movie_results.html", recipe=recipe, movie=movie)
 
 
 @app.route('/get_random_recipe')
 def get_random_recipe():
     """Retrieve data which is the payload info from AJAX and return a recipe"""
+### FROM random_recipe_and_movie_results.html
+
 
     payload = get_edamam_payload()
-    payload.update({'nutrients%5BCA%5D': '0%2B',
-                    'calories': f'{randint(300, 2500)}-{randint(4000,7000)}'})
     recipes = request_edamam_api(payload)
     recipe = choice(recipes)
 
@@ -195,12 +192,19 @@ def get_random_recipe():
 @app.route('/get_random_movie')
 def get_random_movie():
     """Retrieve data which is the payload info from AJAX and return a movie"""
-    
-    payload = get_movie_payload()
+### FROM random_recipe_and_movie_results.html    
+
+    genres = request.args.getlist("with_genres[]")
+    gte = request.args.get("release_date.gte")
+    lte = request.args.get("release_date.lte")
+
+    payload = get_movie_payload(genres, gte, lte)
+
     response = requests.get(MOVIEDB_URL + "discover/movie", params=payload)
     data = response.json()
     page = data['total_pages']
-
+    if int(page)>1000:
+        page = 50
     payload.update({'page': randint(1, page)})
     movie = request_movie_api(payload)
     save_movie_info(movie)
@@ -211,43 +215,43 @@ def get_random_movie():
 @app.route('/display_recipe_search_results')
 def display_recipe_search_results():
     """Display recipe results from user input (ingredients/recipe name/filters)"""
+### FROM random_recipes_search.html
 
     q = request.args.get("search")
-    # calories = request.args.get("calories")
-    # dietary = request.args.get("dietary")
-    # health = request.args.getlist("health")
+    calories = request.args.get("calories")
+    dietary = request.args.get("dietary")
+    health = request.args.getlist("health")
 
     payload = get_edamam_payload()
 
     if q:
         payload.update({'q': q})
-    # if calories:
-    #     payload.update({'calories': calories})
-    # if dietary:
-    #     payload.update({'diet': dietary})
-    # if health:
-    #     payload.update({'health': health})
+    if calories:
+        payload.update({'calories': calories})
+    if dietary:
+        payload.update({'diet': dietary})
+    if health:
+        payload.update({'health': health})
 
     recipes = request_edamam_api(payload)
-    print(payload)
 
-    return render_template("random_recipes.html", recipes=recipes)
+    return render_template("random_recipes_search.html", recipes=recipes)
 
 
 
 @app.route('/display_movie_rec_by_search')
 def movie_results():
     """Output of movie recommendations from the movie title user queried"""
-    
-    movie_title = request.args.get("search")
+### FROM random_movies_search.html    
 
+
+    movie_title = request.args.get("search")
     payload = {'api_key': MOVIEDB_KEY}
 
     payload.update({'query': movie_title})
 
     response = requests.get(MOVIEDB_URL + "search/movie", 
                             params=payload)
-
     data = response.json()
     results = data['results']
     movie_ids = [ movie['id'] for movie in results ]
@@ -260,31 +264,42 @@ def movie_results():
                                 params=payload)
         data = movie_recc.json()
         movies.append(data['results'])
+    print(movies)
 
-    return render_template("random_movies.html", movies=movies[0])
+    return render_template("random_movies_search.html", movies=movies[0])
 
 
 @app.route('/display_movie_rec_by_filters')
 def movie_results_by_filter():
     """Display movie recommendations with filters user selected"""
+### FROM random_movies_search.html
 
-    genre = request.args.getlist("genre")
-    year = request.args.get("year")
+    genres = request.args.getlist("genre")
+    gte = request.args.get("gte")
+    lte = request.args.get("lte")
 
-    payload = get_movie_payload()
+    payload = get_movie_payload(genres, gte, lte)
+    response = requests.get(MOVIEDB_URL + "discover/movie", params=payload)
+    data = response.json()
 
+    page = data['total_pages']
+    if int(page)>1000:
+        page = 50
+    payload.update({'page': randint(1, page)})
     response = requests.get(MOVIEDB_URL + "discover/movie", params=payload)
     data = response.json()
     movies = data['results']
+    
     print(movies)
 
-    return render_template("random_movies.html", movies=movies)
+    return render_template("random_movies_search.html", movies=movies)
 
 
 
 @app.route('/get_youtube_video')
 def get_youtube_video():
     """Retrieve movie title from AJAX and make Youtube API call"""
+### FROM random_recipe_and_movie_results.html
 
     q = request.args.get("q")
 
@@ -306,6 +321,8 @@ def get_youtube_video():
 @app.route('/save_activity')
 def save_activity():
     """Save recipe and movie user chose to the database and user's profile"""
+### FROM random_recipe_and_movie_results.html
+
 
     user_id = session.get("user_id")
 
@@ -324,13 +341,14 @@ def save_activity():
             db.session.add(new_entry)
             db.session.commit()
 
-    return redirect('/display_random_recipes')
+    return ('', 204)
 
 
 
-@app.route('/display_activity')
-def display_activity():
-    """ """
+@app.route('/save_movie_activity')
+def save_movie_activity():
+    """Save movie info into movies table"""
+### FROM random_movies_search.html
 
     movie_info = literal_eval(request.args.get("movie"))
     (movie_url, movie_image, movie_name, movie_id) = movie_info
@@ -345,26 +363,25 @@ def display_activity():
         db.session.add(new_movie_entry)
         db.session.commit()
 
-    return render_template("index.html")
+    return ('', 204)
 
 
 
 @app.route('/display_random_recipes')
 def display_random_recipes():
     """Display random recipes for user to browse through"""
+### FROM index.html
 
     payload = get_edamam_payload()
-    payload.update({'health': 'alcohol-free',
-                    'calories': f'{randint(300, 2500)}-{randint(4000,7000)}'})
     recipes = request_edamam_api(payload)
 
-    return render_template("random_recipes.html", recipes=recipes)
+    return render_template("random_recipes_search.html", recipes=recipes)
 
 
 @app.route('/save_recipe')
 def save_recipe():
     """Save recipe info to database and later to activities"""
-    
+### FROM random_recipes_search.html    
 
     recipe_info = literal_eval(request.args.get("recipe"))
     (recipe_url, recipe_image, recipe_name, recipe_id) = recipe_info
@@ -380,15 +397,14 @@ def save_recipe():
 
     session['recipe_id'] = recipe_id
 
-    payload = get_movie_payload()
-    payload.update({'page': randint(1,50)})
+    # payload = get_movie_payload()
+    # payload.update({'page': randint(1,50)})
 
-    response = requests.get(MOVIEDB_URL + "discover/movie", params=payload)
-    data = response.json()
-    movies = data['results']
+    # response = requests.get(MOVIEDB_URL + "discover/movie", params=payload)
+    # data = response.json()
+    # movies = data['results']
 
-    return render_template("random_movies.html", movies=movies)
-
+    return redirect('/display_movie_rec_by_filters')
 
 """++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"""
 
@@ -477,6 +493,12 @@ def display_activity_log():
     
     activity_info = zip(dates, recipes, movies)
     return render_template("activity_log.html", activity_info=activity_info)
+
+
+@app.route('/display_activity_')
+def display_activity():
+    """ """
+
 
 
 if __name__ == "__main__":
