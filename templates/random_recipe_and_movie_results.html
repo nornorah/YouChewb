@@ -54,7 +54,11 @@
         <br>
 
         {% set movie_url = "https://www.themoviedb.org/movie/"+movie['id']|string %}
+        {% if movie['poster_path'] %}
         {% set movie_image = "https://image.tmdb.org/t/p/w500/"+movie['poster_path'] %}
+        {% else %}
+        {% set movie_image = "https://anest.ufl.edu/files/2015/04/No_image_available.jpg" %}
+        {% endif %}
 
     <div id="movie" style="display:none">
           <a href="{{ movie_url }}" id="movie-url" target="_blank">
@@ -126,7 +130,7 @@
 <div id="youtube" style="display:none">
   <a href="" id="youtube-link" target="_blank"><input type="submit" value="Watch This Movie On YouTube"></a>
   <form action="/save_activity">
-    <input type="submit" value="All Done - Save This Activity">
+    <input type="submit" value="All Done - Save This Activity" id="all-done">
   </form>
 </div>
 

@@ -43,10 +43,17 @@ MOVIEDB_URL = "https://api.themoviedb.org/3/"
 def get_edamam_payload():
     """Helper function to get payload backbone for edamam API request"""
 
+
     dietary = request.args.get("dietary")
     health = request.args.getlist("health[]")
 
-    payload = {'q': "", 'app_id': EDAMAM_ID, 'app_key': EDAMAM_KEY, 'to': '100'}
+    integer = randint(0,50)
+
+    payload = {'q': "", 'app_id': EDAMAM_ID, 'app_key': EDAMAM_KEY, 'health': 'alcohol-free',
+                'calories': (randint(300,1000),'-',randint(2000,6000)),
+                'from': integer, 'to': integer+99}
+
+    print(payload)
 
     if dietary:
         payload.update({'diet': dietary})
@@ -152,14 +159,11 @@ def index():
 
 
 @app.route('/display_random_recipe_and_movie', methods=['GET'])
-def display_random_recipe():
+def display_random_recipe_and_movie():
     """Display random recipes from edamam API call"""
+###from 
 
     payload = get_edamam_payload()
-    payload.update({'nutrients%5BCA%5D': '0%2B',
-                    'health': 'alcohol-free',
-                    'calories': f'{randint(300,1000)}-{randint(2000,6000)}'})
-
     recipes = request_edamam_api(payload)
 
     recipe = choice(recipes)
@@ -361,6 +365,7 @@ def display_random_recipes():
 def save_recipe():
     """Save recipe info to database and later to activities"""
     
+
     recipe_info = literal_eval(request.args.get("recipe"))
     (recipe_url, recipe_image, recipe_name, recipe_id) = recipe_info
 
@@ -383,6 +388,9 @@ def save_recipe():
     movies = data['results']
 
     return render_template("random_movies.html", movies=movies)
+
+
+"""++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"""
 
 
 @app.route('/login', methods=['GET', 'POST'])

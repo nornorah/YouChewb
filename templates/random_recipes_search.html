@@ -10,7 +10,7 @@ Search by Recipe Name or Ingredients:
     Try "chicken parmesan" or "onions, shrimp" (ingredients must be separated by commas)
     <br>
     <br>
-<!-- Filter by:
+Filter by:
 <br>
 Calories:
 <br>
@@ -29,7 +29,7 @@ Dietary Preference:
     <option disabled selected value> -- Select an Option -- </option>
     <option value="balanced">Balanced</option>
     <option value="low-fat">Low-Fat</option>
-    <option value="low-carbs">Low-Carbs</option>
+    <option value="low-carb">Low-Carbs</option>
 </select>
 <br>
 Dietary Restrictions:
@@ -38,7 +38,7 @@ Dietary Restrictions:
   <input type="checkbox" value="vegetarian" name="health">Vegetarian</option>
 </select>
 <br>
- -->
+
 </form>
 
 
@@ -48,12 +48,17 @@ Dietary Restrictions:
     {% set recipe_image = recipe['image'] %}
     {% set recipe_name = recipe['label'] %}
     {% set recipe_id = recipe['uri'][-32:] %}
+    {% set recipe_ingr = '; '.join(recipe['ingredientLines']) %}
 <form action="/save_recipe">
 
       <li> <a href="{{ recipe_url }}" target="_blank">
       <img src="{{ recipe_image }}"></a> 
         <br>
       {{ recipe_name }}
+      <br>
+      You'll Need:
+      <br>
+      {{ recipe_ingr }}
         <br>
           <input type="submit" value="Chewse This and Show Me Movies to Watch">
           <input type="hidden" name="recipe" value="{{ recipe_url, recipe_image, recipe_name, recipe_id }}"></input>

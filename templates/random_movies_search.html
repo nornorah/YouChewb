@@ -12,7 +12,7 @@ Typing in a Movie Title</button>
     <input type="submit" id="movie-search"></input>
 </div>
 </form>
-<!-- <button class="movie-filter-search" value="filters">
+<button class="movie-filter-search" value="filters">
 Filters
 </button>
     <br>
@@ -51,7 +51,7 @@ Filters
         <br>
         <input type="submit" id="movie-search"></input>
 
-</div> -->
+</div>
 </form>
 
 
@@ -62,7 +62,8 @@ Filters
         {% set movie_name = movie['title'] %}
         {% set movie_id = movie['id'] %}
         {% set movie_overview = movie['overview'] %}
-          <form action="/display_activity">
+        
+          <form action="/save_movie_activity">
 
           <li>
           <a href="{{ movie_url }}">
@@ -77,8 +78,8 @@ Filters
           </li>
           <input type="submit" value="Chewse This Movie" id="choose-movie">
         <input type="hidden" name="movie" value="{{ movie_url, movie_image, movie_name, movie_id }}"></input>
-        </form>
         <a href="" id="youtube-link" target="_blank"><button class="youtube" style="display:none">Watch This Movie on YouTube</button></a>
+        </form>
 
         <br>
       </ul>

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+      <h2>Movie Recommendations</h2>
+
+      <ul class="movies">
+
+        {% for movie in movie_data %}
+        
+        {% set movie_url = "https://www.themoviedb.org/movie/"+movie['id']|string %}
+        {% set movie_image = "https://image.tmdb.org/t/p/w500/"+movie['poster_path'] %}
+        {% set movie_name = movie['title'] %}
+        {% set movie_id = movie['id'] %}
+        {% set movie_overview = movie['overview'] %}
+
+          <li>
+          <a href="{{ movie_url }}">
+            <img src="{{ movie_image }}">
+          </a>
+          <br>
+          {{ movie_name }}
+          <br>
+          {{ movie_overview }}
+          </li>
+          <br>
+        <form action="/display_activity">
+          <input type="submit" value="Cool - I'm Done Picking"></input>
+          <input type="hidden" name="movie" value="{{ movie_url, movie_image, movie_name, movie_id }}"></input>
+        </form>
+        {% endfor %}
+      </ul>
+
+
+{% endblock %}
+
