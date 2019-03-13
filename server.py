@@ -151,7 +151,8 @@ def save_movie_info(movie):
 @app.route('/')
 def index():
     """Homepage."""
-
+    if session.get("user_id")==None:
+        session['user_id'] = ''
     return render_template("index.html")
 
 
