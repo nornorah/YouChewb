@@ -1,37 +1,84 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<br>
-<body>
-Not Sure What You Can Eat and Watch Tonight?
-<br>
-Welcome to YouChewb
-<br>
-    <form action="/display_random_recipe_and_movie" method="GET">
-        <input type="submit" value="Give Me a Random Recommendation" name="search_recipe_name"></input>
-    </form> 
+<head>
+
+<link rel="stylesheet" href="/static/index.css">
+</head>
+
+    <!-- Main navigation -->
+    <header>   
+        <!-- Full Page Intro -->
+        <div id="intro-section" class="view">
+           <video class="video-intro" poster="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"></video>
+            <!-- Mask & flexbox options-->
+            <div class="mask rgba-gradient d-flex justify-content-center align-items-center">
+                <!-- Content -->
+                <div class="container px-md-3 px-sm-0">
+                    <!--Grid row-->
+                    <div class="row wow fadeIn">
+                        <!--Grid column-->
+                        <div class="col-md-12 mb-4 white-text text-center wow fadeIn">
+                            <h3 class="display-3 font-weight-bold white-text mb-0 pt-md-5 pt-5">YouChewb</h3>
+
+                            <h4 class="subtext-header mt-2 mb-4">not sure what to cook and watch tonight?</h4>
+
+                            <form action="/display_random_recipe_and_movie">
+                            <button class="btn btn-rounded btn-outline-white">
+                                Get a Random Recommendation</button>
+                            </form>
+
+                            <a href="/display_random_recipes" class="btn btn-rounded btn-outline-white">
+                                Browse for Options</a>
+                                <br>
+                                <br>
+<!--                                 <hr class="hr-light my-4 w-75">
+ -->
+<div class="card mx-auto" style="height: 280px; width: 250px; background-color: #f4f4f4; opacity:0.9">
+
+<!--   <h5 class="card-header bg-gray-dark white-text d-flex justify-content-center align-items-center py-4" style="background-color: #d8d8d8; height: 50px">
+    <strong></strong>
+  </h5>
+ -->
+  <!--Card content-->
+  <div class="card-body px-lg-5 pt-0">
+
+    <!-- Form -->
+    <form class="text-center" style="color: #757575;">
+
+      <!-- Email -->
+      <div class="md-form">
+        <input type="email" id="materialLoginFormEmail" class="form-control">
+        <label for="materialLoginFormEmail">e-mail</label>
+      </div>
+
+      <!-- Password -->
+      <div class="md-form">
+        <input type="password" id="materialLoginFormPassword" class="form-control">
+        <label for="materialLoginFormPassword">password</label>
+      </div>
+
+      <!-- Sign in button -->
+      <button class="btn btn-rounded btn-outline-dark btn-block my-4 waves-effect z-depth-0" type="submit">Sign in</button>
+
+      <!-- Register -->
+<div class="mx-auto text-center d-flex justify-content-center align-items-center">
+      <p class="member">NOT A MEMBER?<br>
+        <a href="/register" style="color: black"> REGISTER</p></a>
 
 
-    <form action="/display_random_recipes" method="GET">
-        <input type="submit" value="Give Me Some Options" name="search_ingredients"></input>
+
     </form>
-    
-    <br>
+    <!-- Form -->
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+  </div>
+</div>
 
-    <form action="/register" method="GET">
-        <input type="submit" value="Register">
-    </form>
-
-    <form action="/login" method="GET">
-        <input type="submit" value="Log In" name="login"></input>
-    </form>
-
-    <form action="/logout" method="GET">
-        <input type="submit" value="Log Out" name="logout"></input>
-    </form>
-
-
-</body>
 
 
 {% endblock %}

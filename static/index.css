@@ -1,0 +1,35 @@
+/* Required for full background image */
+
+html,
+body,
+header,
+#intro-section {
+    height: 100%;
+}
+
+@media (max-width: 740px) {
+    html,
+    body,
+    header,
+    #intro-section {
+        height: 100vh;
+
+    }
+}
+
+h3 {
+font-family: 'Finger Paint', cursive;
+}
+h4 {
+font-family: 'Coming Soon', cursive;
+
+}
+
+.rgba-gradient {
+    background: rgb(186,186,186, 0.5);
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, rgb(235,235,235, 0.5), rgb(29,29,29, 0.5));
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, rgb(235,235,235, 0.5), rgb(29,29,29, 0.5));
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}

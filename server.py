@@ -49,7 +49,7 @@ def get_edamam_payload():
     integer = randint(0,50)
 
     payload = {'q': "", 'app_id': EDAMAM_ID, 'app_key': EDAMAM_KEY, 'health': 'alcohol-free',
-                'calories': (randint(300,1000),'-',randint(2000,6000)),
+                'calories': (randint(500,1000),'-',randint(2000,6000)),
                 'from': integer, 'to': integer+99}
 
     print(payload)
@@ -289,7 +289,7 @@ def movie_results_by_filter():
     response = requests.get(MOVIEDB_URL + "discover/movie", params=payload)
     data = response.json()
     movies = data['results']
-    
+
     print(movies)
 
     return render_template("random_movies_search.html", movies=movies)
