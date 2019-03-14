@@ -7,18 +7,12 @@
 <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow|Atma:300|Cabin+Sketch|Caveat+Brush|Chewy|Dancing+Script|Finger+Paint|Love+Ya+Like+A+Sister|Fjalla+One|Fredericka+the+Great|Hind|Homemade+Apple|Loved+by+the+King|Nanum+Brush+Script|Nanum+Gothic|Nanum+Pen+Script|Nothing+You+Could+Do|Open+Sans+Condensed:300|Oswald|Over+the+Rainbow|Overpass|PT+Sans|PT+Sans+Narrow|Permanent+Marker|Pragati+Narrow|Roboto|Satisfy|Sedgwick+Ave|Itim|Coming+Soon|Source+Sans+Pro" rel="stylesheet">
 <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<link rel="stylesheet" href="/static/base.css">
+
 </head>
-<head>
-
-
-  {% for flash in get_flashed_messages() %}
-    {{ flash }}
-  {% endfor %}
-
-<!-- style="position: fixed"
- -->
+<body>
  <meta name="viewport" content="width=device-width, initial-scale=1">
-<div class="sideNavbar" style="position: fixed; top:0; width:100%; color:black; z-index: 1">
+<div class="sideNavbar" style="position: fixed; top:0; width:100%; color:black; z-index:1">
 <style>
 body {
 font-family: 'Hind', sans-serif;
@@ -44,7 +38,7 @@ font-family: 'Hind', sans-serif;
 .sidenav a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
-  font-size: 25px;
+  font-size: 20px;
   color: #818181;
   display: block;
   transition: 0.3s;
@@ -64,25 +58,24 @@ font-family: 'Hind', sans-serif;
 
 #main {
   transition: margin-left .5s;
-  padding: 16px;
-opacity: 0.9;
+  padding: 10px;
+opacity: 0.4;
 
 }
+</div>
 
 @media screen and (max-height: 450px) {
   .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+  .sidenav a {font-size: 14px;}
 }
 </style>
-</head>
 <body>
-
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <a href="/">Home</a>
-  <a href="/display_random_recipe_and_movie">Random Recommendation</a>
-  <a href="/display_random_recipes">Search Recipes</a>
-  <a href="display_movie_rec_by_filters">Search Movies</a>
+  <a href="/display_random_recipe_and_movie">Recipe & Movie Suggestion</a>
+  <a href="/display_random_recipes">Browse Recipes</a>
+  <a href="display_movie_rec_by_filters">Browse Movies</a>
 </div>
 
 <div id="main">
@@ -104,7 +97,22 @@ function closeNav() {
 }
 </script>
 </body>
+
 </div>
+
+    <div class="container" style="height:50% width:80%; position:fixed; z-index:9999; padding:1%; margin-left:5%; opacity:0.8">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert {{ category }} alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+            {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    
+    </div>
 
   {% block content %}
 
@@ -116,6 +124,5 @@ function closeNav() {
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.4/js/mdb.min.js"></script>
-</body>
 </html>
 

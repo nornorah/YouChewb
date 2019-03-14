@@ -49,7 +49,7 @@ def get_edamam_payload():
     integer = randint(0,50)
 
     payload = {'q': "", 'app_id': EDAMAM_ID, 'app_key': EDAMAM_KEY, 'health': 'alcohol-free',
-                'calories': (randint(500,1000),'-',randint(2000,6000)),
+                'calories': (randint(600,1000),'-',randint(2000,6000)),
                 'from': integer, 'to': integer+99}
 
     print(payload)
@@ -95,6 +95,7 @@ def get_movie_payload(genres=[], gte='', lte=''):
         payload.update({'release_date.gte': gte})
     if lte:
         payload.update({'release_date.lte': lte})
+
     return payload
 
 
@@ -153,6 +154,7 @@ def index():
     """Homepage."""
     if session.get("user_id")==None:
         session['user_id'] = ''
+
     return render_template("index.html")
 
 
@@ -187,6 +189,7 @@ def get_random_recipe():
     recipe = choice(recipes)
 
     save_recipe_info(recipe)
+
     return jsonify(recipe)
 
 
@@ -286,6 +289,7 @@ def movie_results_by_filter():
     page = data['total_pages']
     if int(page)>1000:
         page = 50
+
     payload.update({'page': randint(1, page)})
     response = requests.get(MOVIEDB_URL + "discover/movie", params=payload)
     data = response.json()
@@ -420,7 +424,6 @@ def login():
             return render_template("login_form.html")
         else:
             flash("Already logged in. Please make a selection")
-            return redirect("/")
     else:
         # Get form variables
         email = request.form.get("email")
@@ -428,18 +431,18 @@ def login():
 
         user = User.query.filter_by(email=email).first()
 
-        if not user:
-            flash("Looks like you have not yet registered! Please register")
-            return redirect("/register")
+        if user:
+            if sha256_crypt.verify(password, user.password):
+                session["user_id"] = user.user_id #set session of user as their user_id in database
+                flash("Logged in", 'alert-success')
+                return redirect("/")
+            else:
+                flash("Incorrect password", 'alert-danger')
+                return redirect("/")
+        else:
+            flash("Looks like you have not yet registered! Please register", 'alert-info')
+            return redirect("/")
 
-        if not sha256_crypt.verify(password, user.password):
-            flash("Incorrect password")
-            return redirect("/login")
-
-        session["user_id"] = user.user_id #set session of user as their user_id in database
-
-        flash("Logged in")
-        return redirect("/")
 
 
 @app.route('/logout')
@@ -494,6 +497,28 @@ def display_activity_log():
     
     activity_info = zip(dates, recipes, movies)
     return render_template("activity_log.html", activity_info=activity_info)
+
+
+# @app.route('/get_cookie')
+# def get_cookie():
+#     """Get session cookie from AJAX call"""
+#     return jsonify(session.get("user_id"))
+# email = request.form.get("email")
+#         password = request.form.get("password")
+
+#         user = User.query.filter_by(email=email).first()
+
+#         if user:
+#             if sha256_crypt.verify(password, user.password):
+#                 session["user_id"] = user.user_id #set session of user as their user_id in database
+#                 flash("Logged in")
+#                 return redirect("/")
+#             else:
+#                 flash("Incorrect password")
+#                 return redirect("/")
+#         else:
+#             flash("Looks like you have not yet registered! Please register")
+#             return redirect("/")
 
 
 @app.route('/display_activity_')

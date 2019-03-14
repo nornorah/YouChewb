@@ -10,7 +10,8 @@ Get a Recommendation by:
 <button class="movie-title-search" value="movie-title-search">
 Typing in a Movie Title</button>
 <div id="movie-title" style="display:none">
-    <form action="/display_movie_rec_by_search">
+
+<form action="/display_movie_rec_by_search">
 
     <input type="text" id="search" name="search"></input>
     <input type="submit" id="movie-search"></input>
@@ -83,7 +84,7 @@ Filters
           </div>
           <br>
           {{ movie_overview }}
-
+          <br>
           <input type="submit" value="Chewse This Movie" id="choose-movie">
         <input type="hidden" name="movie" value="{{ movie_url, movie_image, movie_name, movie_id }}"></input>
         <a href="" id="youtube-link"><input type="submit" value="Watch This Movie On YouTube" style="display:none" class="youtube"></a>
