@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+<br>
+<br>
+<br>
 Get a Recommendation by:
 <br>
 <button class="movie-title-search" value="movie-title-search">
@@ -69,7 +73,6 @@ Filters
         {% set movie_id = movie['id'] %}
         {% set movie_overview = movie['overview'] %}
 
-          <form action="/save_movie_activity">
 
           <a href="{{ movie_url }}">
             <img src="{{ movie_image }}">
@@ -83,8 +86,15 @@ Filters
 
           <input type="submit" value="Chewse This Movie" id="choose-movie">
         <input type="hidden" name="movie" value="{{ movie_url, movie_image, movie_name, movie_id }}"></input>
-        </form>
-        <a href="" id="youtube-link"><input type="submit" value="Watch This Movie On YouTube" style="display:none" id="youtube"></a>
+        <a href="" id="youtube-link"><input type="submit" value="Watch This Movie On YouTube" style="display:none" class="youtube"></a>
+
+        <div id="youtube" style="display:none">
+  <a href="" id="youtube-link" target="_blank"><input type="submit" value="Watch This Movie On YouTube"></a>
+  <form action="/save_activity">
+    <input type="submit" value="Chewse This Movie" id="choose-movie">
+  </form>
+
+
 
 
         <br>
