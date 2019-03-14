@@ -74,7 +74,6 @@ Filters
         {% set movie_id = movie['id'] %}
         {% set movie_overview = movie['overview'] %}
 
-
           <a href="{{ movie_url }}">
             <img src="{{ movie_image }}">
           </a>
@@ -83,23 +82,27 @@ Filters
           {{ movie_name }}
           </div>
           <br>
+          Synopsis:
+          <br>
           {{ movie_overview }}
           <br>
-          <input type="submit" value="Chewse This Movie" id="choose-movie">
-        <input type="hidden" name="movie" value="{{ movie_url, movie_image, movie_name, movie_id }}"></input>
-        <a href="" id="youtube-link"><input type="submit" value="Watch This Movie On YouTube" style="display:none" class="youtube"></a>
 
+<!-- 
+          <input type="submit" value="Chewse This Movie" id="choose-movie">
+</input>
+        <a href="" id="youtube-link"><input type="submit" value="Watch This Movie On YouTube"></a>
+ --><!-- 
         <div id="youtube" style="display:none">
-  <a href="" id="youtube-link" target="_blank"><input type="submit" value="Watch This Movie On YouTube"></a>
+  <a href="" id="youtube-link" target="_blank"><input type="submit" value="Watch This Movie On YouTube"></a> -->
   <form action="/save_activity">
     <input type="submit" value="Chewse This Movie" id="choose-movie">
+         <input type="hidden" name="movie" value="{{ movie_url, movie_image, movie_name, movie_id }}"></input>
   </form>
+<br>
 
-
-
-
-        <br>
-      </ul>
+       
+<!--  <br>
+      </ul> -->
       {% endfor %}
 
 <script src="/static/movie_update.js"></script>

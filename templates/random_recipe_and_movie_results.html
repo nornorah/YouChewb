@@ -1,16 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/static/recipe_movie.css">
+</head>
 
 <br>
 <br>
 <br>
-How about        
-        <a href="{{ recipe['url'] }}" id="recipe-url" target="_blank">
-        <img src="{{ recipe['image'] }}" id="recipe-img"></a> 
-          <br>
+<div class="row">
+<div class="col-xs-6 left" style="margin-left: 15px;">
+<h3 class="title" style="font-family: 'Cabin Sketch', cursive;">how about some...</h3>
+    
+    <a href="{{ recipe['url'] }}" id="recipe-url" target="_blank">
+      <div class="content-overlay"></div>
+      <img class="content-image" src="{{ recipe['image'] }}" id="recipe-img"style="width:350px; height:450px">
+      <div class="content-details fadeIn-top">
+
+      </div>
+    </a>
+ <!--      <div class="view overlay">
+        <img src="{{ recipe['image'] }}" id="recipe-img" class="img-fluid" alt=""></a>
+            <div class="mask flex-center rgba-stylish-light">
+              <p class="white-text">click to see recipe instructions</p>
+            </div>
+          </div> -->
       <div id="recipe-name">
-          {{ recipe['label'] }}
+          {{ recipe['label'] }}?
       </div>
       <br>
       You'll Need:
@@ -22,10 +39,11 @@ How about
       <div id="happy-recipe">
       Want to Chewse This?
       <br>
-          <button class="happy-button" id="recipe-yes" value="yes">Yes - Give Me a Movie Recommendation</button>
+          <button class="happy-button" id="recipe-yes" value="yes">Yes</button>
           <br>
-          <button class="happy-button" id="recipe-no" value="no">No - Give Me Other Choices</button>
+          <button class="happy-button" id="recipe-no" value="no">No. Let me Filter</button>
       </div> 
+  </div>
 
       <div id="dietary" style="display:none">
           Dietary Preference?
@@ -34,19 +52,19 @@ How about
           <button class="dietary" id="dietary2" value="low-carb">Low-Carb</button>
           <br>
           <button class="dietary" id="dietary3" value="low-fat">Low-Fat</button>
-          <button class="dietary" id="dietary4">No Preference</button>            
+          <button class="dietary" id="dietary4" value="">No Preference</button>            
       </div>
 
       <div id="peanut" style="display:none">
         Peanut Allergies?
           <button class="peanut" id="dietary5" value="peanut-free">Yes</button>  
-          <button class="peanut" id="dietary6">No</button>
+          <button class="peanut" id="dietary6" value="">No</button>
       </div>    
 
       <div id="vege" style="display:none">
           Vegetarian?
           <button class="vege" id="health1" value="vegetarian">Yes</button>
-          <button class="vege" id="health2">No</button>
+          <button class="vege" id="health2" value="">No</button>
       </div>  
 
       <div id="submit-button-recipe" style="display:none">
@@ -55,17 +73,20 @@ How about
           <br>  
 
         <br>
+</div>
 
-        {% set movie_url = "https://www.themoviedb.org/movie/"+movie['id']|string %}
+
+
+    <div id="movie" class="col-xs-6 right" style="margin-right:15px; display:none;">
+              {% set movie_url = "https://www.themoviedb.org/movie/"+movie['id']|string %}
         {% if movie['poster_path'] %}
         {% set movie_image = "https://image.tmdb.org/t/p/w500/"+movie['poster_path'] %}
         {% else %}
         {% set movie_image = "https://anest.ufl.edu/files/2015/04/No_image_available.jpg" %}
         {% endif %}
-
-    <div id="movie" style="display:none">
+<h3 class="title" style="font-family: 'Cabin Sketch', cursive;">...and this to watch?</h3>
           <a href="{{ movie_url }}" id="movie-url" target="_blank">
-            <img src="{{ movie_image }}" id="movie-img"></a>
+            <img src="{{ movie_image }}" id="movie-img" style="width:350px; height:450px"></a>
           <br>
         <div id="movie-name">
           {{ movie['title'] }} 
@@ -73,7 +94,6 @@ How about
         <br>
         Synopsis:
         <div id="movie-overview">
-        <br>
         {{ movie['overview'] }}
         <br>
       </div>
@@ -81,13 +101,12 @@ How about
       <div id="happy-movie">
       Want to Chewse This?
       <br>
-          <button class="happy-movie-button" id="movie-yes" value="yes">Yes - Give Me the YouTube Link</button>
+          <button class="happy-movie-button" id="movie-yes" value="yes">Yes. Give Me the YouTube Link</button>
           <br>
-          <button class="happy-movie-button" id="movie-no" value="no">No - Give Me Other Choices</button>
+          <button class="happy-movie-button" id="movie-no" value="no">No. Give Me Other Choices</button>
       </div> 
 
         <br>
-</div>
     <div id="genre-checkbox" style="display:none">
     Filter by Genre?
     <br>
@@ -116,12 +135,6 @@ How about
     <div id="year-radio" style="display:none">
         Filter by Year Released?
         <br>
-<!--    <input type="radio" class="year" value="1970" name="year">Released after 1970</input>
-        <input type="radio" class="year" value="1980" name="year">Released after 1980</input>
-        <input type="radio" class="year" value="1990" name="year">Released after 1990</input>
-        <br>
-        <input type="radio" class="year" value="2000" name="year">Released after 2000</input>
-        <input type="radio" class="year" value="2010" name="year">Released after 2010</input> -->
         <input type="text" id="gte" placeholder="Released after" class="year">
         <input type="text" id="lte" placeholder="Released before" class="year">
         <input type="radio" class="year" value="" name="year">No Preference</input>
@@ -138,6 +151,9 @@ How about
     <input type="submit" value="All Done - Save This Activity" id="all-done">
   </form>
 </div>
+</div>
+</div>
+
 
 <script src="/static/recipe_update.js"></script>
 

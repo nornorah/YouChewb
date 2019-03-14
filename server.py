@@ -46,11 +46,10 @@ def get_edamam_payload():
     dietary = request.args.get("dietary")
     health = request.args.getlist("health[]")
 
-    integer = randint(0,50)
+    # integer = randint(0,50)
 
     payload = {'q': "", 'app_id': EDAMAM_ID, 'app_key': EDAMAM_KEY, 'health': 'alcohol-free',
-                'calories': (randint(600,1000),'-',randint(2000,6000)),
-                'from': integer, 'to': integer+99}
+                'calories': f'{randint(600,1500)}-{randint(3000,6000)}','from': 0, 'to': 100}
 
     print(payload)
 
@@ -168,7 +167,7 @@ def display_random_recipe_and_movie():
 
     recipe = choice(recipes)
     save_recipe_info(recipe)
-
+    print(recipe)
     payload = get_movie_payload()
     payload.update({'page': randint(1,50)})
 
@@ -496,14 +495,20 @@ def display_activity_log():
     movies = [ Movie.query.filter_by(movie_id=activity.movie_id).first() for activity in activities ]
     
     activity_info = zip(dates, recipes, movies)
+
     return render_template("activity_log.html", activity_info=activity_info)
 
 
-@app.route('/display_activity_')
+@app.route('/display_activity')
 def display_activity():
-    """ """
+    """Display recipe and movie choice from today"""
 
+    recipe_id = session.get("recipe_id")
+    movie_id = session.get("movie_id")
+    recipes = Recipe.query.filter_by(recipe_id=recipe_id).first()
+    movies = Movie.query.filter_by(movie_id=movie_id).first()
 
+    return render_template("display_activity.html", recipe=recipes, movie=movies)
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point

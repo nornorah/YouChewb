@@ -1,21 +1,37 @@
 {% extends 'base.html' %}
 {% block content %}
-
+<br>
+<br>
+<br>
   <h1>Login</h1>
 
-    <form action="/login" method="POST">
 
-      Email:
-      <input type="email" name="email" required class="form-control">
-      <br>
 
-      Password:
-      <input type="password" name="password" required class="form-control">
-      <br>
+<form action="/login" method="POST">
 
-      <input type="submit" value="Log In" name="login_button">
 
-    </form>
+  <div class="card-body px-lg-5 pt-0">
 
+    <!-- Form -->
+    <form class="text-center" style="color: #757575;">
+      <!-- Email -->
+      <div class="md-form">
+        <input type="email" id="materialLoginFormEmail" class="form-control" name="email" required>
+        <label for="materialLoginFormEmail">e-mail</label>
+      </div>
+
+      <!-- Password -->
+      <div class="md-form">
+        <input type="password" id="materialLoginFormPassword" class="form-control" name="password" required>
+        <label for="materialLoginFormPassword">password</label>
+      </div>
+
+      <!-- Sign in button -->
+      <button class="btn btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit" style="color:black; font-size:16px; font-family: 'Cabin Sketch', cursive;" id="login">Log in</button>
+        </form>
+      <!-- Register -->
+<div class="mx-auto text-center d-flex justify-content-center align-items-center">
+      <p class="member" style="font-family: 'Cabin Sketch', cursive; color: #757575;">NOT A MEMBER?<br>
+        <a href="/register" style="color: black"> REGISTER</p></a>
 
 {% endblock %}

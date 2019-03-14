@@ -13,7 +13,7 @@ $(document).ready(function() {
 
     $('#choose-movie').click(function() {
         // evt.preventDefault();
-        $('.youtube').show()
+        $('#youtube').show()
 
         let formData = {'q': $('#movie-name').html()};
         console.log(formData)

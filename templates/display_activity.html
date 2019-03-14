@@ -1,23 +1,126 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<br>
+<br>
+<br>
+<h4 style="font-family: 'Cabin Sketch', cursive;">looks like you chose...</h4>
     <a href="{{ recipe.recipe_url }}">
-    <img src="{{ recipe.recipe_image }}"></a>
+    <img src="{{ recipe.recipe_image }}" style="width:300px; height:350px"></a>
     <br>
     {{ recipe.recipe_name }}
     <br> 
-    <a href="{{ movie.movie_url }}"><img src="{{ movie.movie_image }}"></a>
+    <a href="{{ movie.movie_url }}"><img src="{{ movie.movie_image }}" style="width:300px; height:350px"></a>
     <br>
     {{ movie.movie_name }}
     <br>
-    <a href="https://www.youtube.com/watch?v={{ video }}"><img src="https://www.capebretonpost.com/media/photologue/photos/cache/sw-web-09042018-youtube_logo_large.jpg"></a>Watch on YouTube
+
+
+<!-- Grid row -->
+<div class="row">
+
+  <!-- Grid column -->
+  <div class="col-s-6 col-md-6 col-lg-6 col-xl-6 mb-r">
+
+    <!--Panel-->
+    <div class="card card-body mb-3">
+      <div class="media d-block d-md-flex">
+        <img class="d-flex avatar-2 mb-md-0 mb-3 mx-auto" src="https://mdbootstrap.com/img/Others/documentation/img (31)-mini.jpg"
+          alt="Generic placeholder image">
+        <div class="media-body text-center text-md-left ml-md-3 ml-0">
+          <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia magni dolores
+            eos qui ratione voluptatem sequi nesciunt.</p>
+          <button type="button" class="btn btn-primary btn-md">Read more</button>
+        </div>
+      </div>
+    </div>
+    <!--/.Panel-->
+
+    <!--Panel-->
+    <div class="card card-body mb-3">
+      <div class="media d-block d-md-flex">
+        <div class="media-body pr-md-3 pr-0 text-center text-md-left">
+          <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est
+            eligendi optio cumque nihil impedit.</p>
+          <button type="button" class="btn btn-primary btn-md">Read more</button>
+        </div>
+        <img class="d-flex mr-3 avatar-2 mt-md-0 mt-3 mx-auto" src="https://mdbootstrap.com/img/Others/documentation/img (27)-mini.jpg"
+          alt="Generic placeholder image">
+      </div>
+    </div>
+    <!--/.Panel-->
+
+    <!--Panel-->
+    <div class="card card-body">
+      <div class="media d-block d-md-flex">
+        <img class="d-flex avatar-2 mb-md-0 mb-3 mx-auto" src="https://mdbootstrap.com/img/Others/documentation/img (28)-mini.jpg"
+          alt="Generic placeholder image">
+        <div class="media-body text-center text-md-left ml-md-3 ml-0">
+          <p> Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime
+            placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Itaque earum rerum
+            hic tenetur a sapiente delectus.</p>
+        </div>
+      </div>
+    </div>
+    <!--/.Panel-->
+
+  </div>
+  <!-- Grid column -->
+
+  <!-- Grid column -->
+  <div class="col-s-6 col-md-6 col-lg-6 col-xl-6">
+
+    <!--Panel-->
+    <div class="card mb-3">
+      <h3 class="card-header indigo white-text text-uppercase text-center">Authors</h3>
+      <div class="card-body">
+        <div class="media d-block d-md-flex mt-md-0 mt-4 mb-4">
+          <img class="d-flex mb-md-0 mb-3 avatar-2 rounded-circle z-depth-1 mx-auto" src="https://mdbootstrap.com/img/Others/documentation/img (3)-mini.jpg"
+            alt="Generic placeholder image">
+          <div class="media-body ml-md-3 ml-0">
+            <p align="justify">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
+              deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non
+              provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum
+              fuga.
+            </p>
+            <div class="text-center text-md-left">
+              <button type="button" class="btn btn-indigo btn-rounded btn-md">Read more</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="media d-block d-md-flex">
+          <div class="media-body mr-md-3 mr-0">
+            <p align="justify">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis
+              est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis
+              voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis.</p>
+            <div class="text-center text-md-left">
+              <button type="button" class="btn btn-indigo btn-rounded btn-md">Read more</button>
+            </div>
+          </div>
+          <img class="d-flex mr-3 mb-md-0 mb-3 mt-md-0 mt-4 avatar-2 rounded-circle z-depth-1 mx-auto" src="https://mdbootstrap.com/img/Others/documentation/img (2)-mini.jpg"
+            alt="Generic placeholder image">
+        </div>
+      </div>
+    </div>
+    <!--/.Panel-->
+
+  </div>
+  <!-- Grid column -->
+
+</div>
+<!-- Grid row -->
+
+
+
+{% endblock %}
+
+
+    
+<!--     <a href="https://www.youtube.com/watch?v={{ video }}"><img src="https://www.capebretonpost.com/media/photologue/photos/cache/sw-web-09042018-youtube_logo_large.jpg"></a>Watch on YouTube
     <br>
     <form action="/save_activity">
         <input type="submit" value="Save This Activity and Browse Random Recipes">
     </form>
     <br>
-
-
-
-{% endblock %}
+ -->

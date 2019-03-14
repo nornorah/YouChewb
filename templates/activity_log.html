@@ -2,27 +2,23 @@
 
 {% block content %}
 
-
-{% for date, recipe, movie in activity_info %}
-
-{{ date }}
-
 <br>
-<a href="{{ recipe.recipe_url }}" id="recipe-url" target="_blank"><img src="{{ recipe.recipe_image }}" id="recipe-img"></a> 
+<br>
+{% for date, recipe, movie in activity_info %}
+<br>
+<h4 style="font-family: 'Cabin Sketch', cursive;">{{ date }}
+</h4>
+<a href="{{ recipe.recipe_url }}" id="recipe-url" target="_blank"><img src="{{ recipe.recipe_image }}" id="recipe-img" style="width:300px; height:350px"></a> 
 <br>
 <div id="recipe-name">
 {{ recipe.recipe_name }}
 </div>
 <br>
-
-
-<a href="{{ movie.movie_url }}" id="movie-url" target="_blank">
-<img src="{{ movie.movie_image }}" id="movie-img"></a>
+<a href="{{ movie.movie_url }}" id="movie-url" target="_blank"><img src="{{ movie.movie_image }}" id="movie-img" style="width:300px; height:350px"></a>
 <br>
 <div id="movie-name">
 {{ movie.movie_name }} 
 </div>  
-<br>
 
 
 {% endfor %}
