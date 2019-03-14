@@ -499,28 +499,6 @@ def display_activity_log():
     return render_template("activity_log.html", activity_info=activity_info)
 
 
-# @app.route('/get_cookie')
-# def get_cookie():
-#     """Get session cookie from AJAX call"""
-#     return jsonify(session.get("user_id"))
-# email = request.form.get("email")
-#         password = request.form.get("password")
-
-#         user = User.query.filter_by(email=email).first()
-
-#         if user:
-#             if sha256_crypt.verify(password, user.password):
-#                 session["user_id"] = user.user_id #set session of user as their user_id in database
-#                 flash("Logged in")
-#                 return redirect("/")
-#             else:
-#                 flash("Incorrect password")
-#                 return redirect("/")
-#         else:
-#             flash("Looks like you have not yet registered! Please register")
-#             return redirect("/")
-
-
 @app.route('/display_activity_')
 def display_activity():
     """ """

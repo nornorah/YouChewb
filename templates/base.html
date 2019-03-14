@@ -38,7 +38,7 @@ font-family: 'Hind', sans-serif;
 .sidenav a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 15px;
   color: #818181;
   display: block;
   transition: 0.3s;
@@ -59,7 +59,7 @@ font-family: 'Hind', sans-serif;
 #main {
   transition: margin-left .5s;
   padding: 10px;
-opacity: 0.4;
+opacity: 0.8;
 
 }
 </div>
@@ -70,17 +70,28 @@ opacity: 0.4;
 }
 </style>
 <body>
-<div id="mySidenav" class="sidenav">
+<div id="mySidenav" class="sidenav" style="font-family:'Cabin Sketch', cursive;">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="/">Home</a>
-  <a href="/display_random_recipe_and_movie">Recipe & Movie Suggestion</a>
-  <a href="/display_random_recipes">Browse Recipes</a>
-  <a href="display_movie_rec_by_filters">Browse Movies</a>
+  <a href="/">HOME</a>
+  <a href="/display_random_recipe_and_movie">RECIPE & MOVIE SUGGESTION</a>
+  <a href="/display_random_recipes">BROWSE RECIPES</a>
+  <a href="/display_movie_rec_by_filters">BROWSE MOVIES</a>
+  <br>
+  <br>
+  {% if session['user_id'] == '' %}
+  <a href="/login">LOGIN</a>
+  <a href="/register">REGISTER</a>
+  
+  {% else %}
+  <a href="/display_activity">SEE TODAY'S SAVED RECIPE & MOVIE </a>
+  <a href="/display_activity_log"> SEE MY PAST SAVED RECIPES & MOVIES </a>
+  {% endif %}
 </div>
 
 <div id="main">
 
   <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+
 </div>
 
 <script>
@@ -99,6 +110,8 @@ function closeNav() {
 </body>
 
 </div>
+
+
 
     <div class="container" style="height:50% width:80%; position:fixed; z-index:9999; padding:1%; margin-left:5%; opacity:0.8">
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -120,9 +133,12 @@ function closeNav() {
 
 
 
+<script src="/static/index.js"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.4/js/mdb.min.js"></script>
 </html>
-
+<!-- 
+  <a href="/login" style="color:black; margin-left:70%; margin-right:1%; font-size: 20px">LOGIN </a>
+ -->
