@@ -11,15 +11,15 @@ $(document).ready(function() {
         $('#movie-title').hide()
     });
 
-    $('#choose-movie').click(function() {
-        // evt.preventDefault();
+    $('#choose-movie').click(function(evt) {
+        evt.preventDefault();
         $('#youtube').show()
 
-        let formData = {'q': $('#movie-name').html()};
+        let formData = {'q': $('#movie-name').val()};
         console.log(formData)
         
         $.get('/get_youtube_video', formData, (results) => {
-        $('#youtube-link').attr('href', "https://www.youtube.com/watch?v="+results);
+        $('#youtube-link').attr('src', "https://www.youtube.com/embed/"+results);
         });
         });
 

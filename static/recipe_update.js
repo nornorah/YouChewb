@@ -31,7 +31,8 @@ $(document).ready(function() {
 
     $(".vege").click(function() {
         vegetarian = $(this).val();
-        $("#submit-button-recipe").show();
+        $("#new-random-recipe").show()
+        $("#recipe-no").hide()
     });
 
     $('#new-random-recipe').click(function() {
@@ -68,7 +69,8 @@ $(document).ready(function() {
         $('#recipe-img').attr('src', results.image);
         $('#recipe-name').html(results.label);
         $('#recipe-ingredients').html((results.ingredientLines).join('; '))
-        $('#new-random-recipe').attr('value', "Give Me Another One")
+        $('#recipe-yes').attr('html', "chewse this");
+
         });    
         });
 
@@ -87,11 +89,13 @@ $(document).ready(function() {
 
     $(".genre").click(function() {
         genre = getGenre();
-        $("#year-radio").show().delay(5000);
+        $("#year-radio").show();
     });
 
     $(".year").click(function() {
-        $("#submit-button-movie").show();
+        $("#new-random-movie").show();
+        $("#movie-no").hide()
+
     });
 
     $('#new-random-movie').click(function() {
@@ -116,14 +120,13 @@ $(document).ready(function() {
             $('#movie-img').attr('src', "https://image.tmdb.org/t/p/w500/"+results.poster_path);
             $('#movie-name').html(results.title);
             $('#movie-overview').html((results.overview))
-            $('#new-random-movie').attr('value', "Give Me Another One")
+            $('#movie-yes').attr('html', "chewse this");
+
             });
         });
 
-    $("#movie-yes").click(function(evt) {
-        evt.preventDefault();
-
-        $("#youtube").show();
+    $("#movie-yes").click(function() {
+        $("#youtube-link").show();
 
         let formData = {'q': $('#movie-name').html()};
 
@@ -136,7 +139,9 @@ $(document).ready(function() {
 
 
 
+// saved = User.
 
+// if recipe['id']==recipe_id
 
 
 

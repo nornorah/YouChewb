@@ -5,46 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/static/recipe_movie.css">
 </head>
-
 <br>
 <br>
 <br>
 <div class="row">
-<div class="col-xs-6 left" style="margin-left: 15px;">
-<h3 class="title" style="font-family: 'Cabin Sketch', cursive;">how about some...</h3>
-    
-    <a href="{{ recipe['url'] }}" id="recipe-url" target="_blank">
-      <div class="content-overlay"></div>
-      <img class="content-image" src="{{ recipe['image'] }}" id="recipe-img"style="width:350px; height:450px">
-      <div class="content-details fadeIn-top">
+  {% set recipe_url = recipe['url'] %}
+  {% set recipe_image = recipe['image'] %}
+  {% set recipe_name = recipe['label'].split(':')[-1] %}
+  {% set recipe_ing = ('; '.join(recipe['ingredientLines'])) %}
+  {% set recipe_id = recipe['uri'][-32:] %}
+<!-- Jumbotron -->
+<div class="jumbotron text-center col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12">
 
-      </div>
+  <!-- Title -->
+  <h4 class="card-title h4 pb-2" id="recipe-name" style="font-family: 'Cabin Sketch', cursive;"><strong>{{ recipe_name }}</strong></h4>
+
+  <!-- Card image -->
+  <div class="view overlay my-4 text-center">
+    <img src="{{ recipe_image }}" class="img-fluid mx-auto d-block" id="recipe-img" style="width:400px; height:450px">
+    <a href="{{ recipe_url }}" id="recipe-url">
+      <div class="mask rgba-white-slight"></div>
     </a>
- <!--      <div class="view overlay">
-        <img src="{{ recipe['image'] }}" id="recipe-img" class="img-fluid" alt=""></a>
-            <div class="mask flex-center rgba-stylish-light">
-              <p class="white-text">click to see recipe instructions</p>
-            </div>
-          </div> -->
-      <div id="recipe-name">
-          {{ recipe['label'] }}?
-      </div>
-      <br>
-      You'll Need:
-      <div id="recipe-ingredients">
-        {{ '; '.join(recipe['ingredientLines']) }}
-        <br>
-      </div>
-      <br>
-      <div id="happy-recipe">
-      Want to Chewse This?
-      <br>
-          <button class="happy-button" id="recipe-yes" value="yes">Yes</button>
-          <br>
-          <button class="happy-button" id="recipe-no" value="no">No. Let me Filter</button>
-      </div> 
   </div>
 
+
+  <p class="card-text" id="recipe-ingredients"><h5 style="color:#399B80">you'll need...</h5> {{ recipe_ing }}</p>
       <div id="dietary" style="display:none">
           Dietary Preference?
           <br>
@@ -66,48 +51,40 @@
           <button class="vege" id="health1" value="vegetarian">Yes</button>
           <button class="vege" id="health2" value="">No</button>
       </div>  
-
-      <div id="submit-button-recipe" style="display:none">
-          <input type="submit" value="Filter and Get a New Recipe" id="new-random-recipe">
-      </div>
-          <br>  
-
-        <br>
+    <button type="button" class="btn btn-outline-default waves-effect text-center" id="recipe-yes" style="border-radius:20px; font-family: 'Cabin Sketch', cursive;">chewse this recipe</button>
+            <button type="button" class="btn btn-outline-default waves-effect text-center" id="new-random-recipe" style="border-radius:20px; font-family: 'Cabin Sketch', cursive; display:none;">get a new recipe</button>
+            <button type="button" class="btn btn-outline-default waves-effect text-center" id="recipe-no" style="border-radius:20px; font-family: 'Cabin Sketch', cursive;">filter more</button>
 </div>
 
 
+{% set movie_url = "https://www.themoviedb.org/movie/"+movie['id']|string %}        
+{% if movie['poster_path'] %}
+{% set movie_image = "https://image.tmdb.org/t/p/w500/"+movie['poster_path'] %}
+{% else %}
+{% set movie_image = "https://anest.ufl.edu/files/2015/04/No_image_available.jpg" %}
+{% endif %}
+{% set movie_name = movie['title'] %}
+{% set movie_id = movie['id'] %}
+{% set movie_overview = movie['overview'] %}
 
-    <div id="movie" class="col-xs-6 right" style="margin-right:15px; display:none;">
-              {% set movie_url = "https://www.themoviedb.org/movie/"+movie['id']|string %}
-        {% if movie['poster_path'] %}
-        {% set movie_image = "https://image.tmdb.org/t/p/w500/"+movie['poster_path'] %}
-        {% else %}
-        {% set movie_image = "https://anest.ufl.edu/files/2015/04/No_image_available.jpg" %}
-        {% endif %}
-<h3 class="title" style="font-family: 'Cabin Sketch', cursive;">...and this to watch?</h3>
-          <a href="{{ movie_url }}" id="movie-url" target="_blank">
-            <img src="{{ movie_image }}" id="movie-img" style="width:350px; height:450px"></a>
-          <br>
-        <div id="movie-name">
-          {{ movie['title'] }} 
-        </div>  
-        <br>
-        Synopsis:
-        <div id="movie-overview">
-        {{ movie['overview'] }}
-        <br>
-      </div>
-  <br>
-      <div id="happy-movie">
-      Want to Chewse This?
-      <br>
-          <button class="happy-movie-button" id="movie-yes" value="yes">Yes. Give Me the YouTube Link</button>
-          <br>
-          <button class="happy-movie-button" id="movie-no" value="no">No. Give Me Other Choices</button>
-      </div> 
+<!-- Jumbotron -->
 
-        <br>
-    <div id="genre-checkbox" style="display:none">
+<div class="jumbotron text-center col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12" id="movie" style="display:none">
+
+  <!-- Title -->
+  <h4 class="card-title h4 pb-2" id="movie-name" style="font-family: 'Cabin Sketch', cursive;"><strong>{{ movie_name }}</strong></h4>
+
+  <!-- Card image -->
+  <div class="view overlay my-4 text-center">
+    <img src="{{ movie_image }}" class="img-fluid mx-auto d-block" id="movie-img" style="width:400px; height:450px">
+    <a href="{{ movie_url }}" id="movie-url">
+      <div class="mask rgba-white-slight"></div>
+    </a>
+  </div>
+
+
+  <p class="card-text" id="movie-overview"><h5 style="color:#399B80"> synopsis </h5>{{ movie_overview }}</p>
+      <div id="genre-checkbox" style="display:none">
     Filter by Genre?
     <br>
       <input type="checkbox" class="genre" value="action">Action</input>
@@ -140,21 +117,17 @@
         <input type="radio" class="year" value="" name="year">No Preference</input>
     </div>
 
-    <div id="submit-button-movie" style="display:none">
-      <input type="submit" value="Filter and Get a New Movie" id="new-random-movie">
-    </div>
-        
+          <button type="button" class="btn btn-outline-default waves-effect text-center" id="movie-yes" style="border-radius:20px; font-family: 'Cabin Sketch', cursive;">chewse this movie</button>
+            <button type="button" class="btn btn-outline-default waves-effect text-center" id="new-random-movie" style="border-radius:20px; font-family: 'Cabin Sketch', cursive; display:none;">get a new movie</button>
+            <button type="button" class="btn btn-outline-default waves-effect text-center" id="movie-no" style="border-radius:20px; font-family: 'Cabin Sketch', cursive;">filter more</button>
 
-<div id="youtube" style="display:none">
-  <a href="" id="youtube-link" target="_blank"><input type="submit" value="Watch This Movie On YouTube"></a>
+
   <form action="/save_activity">
-    <input type="submit" value="All Done - Save This Activity" id="all-done">
+    <a href="" id="youtube-link" target="_blank"><button type="button" class="btn btn-rounded waves-effect" style="color: red; border-radius:500px; display:none;"></button></a>
   </form>
 </div>
+<!-- Jumbotron -->
 </div>
-</div>
-
-
 <script src="/static/recipe_update.js"></script>
 
 {% endblock %}

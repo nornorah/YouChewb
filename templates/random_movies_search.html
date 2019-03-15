@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div style="background-color:#D6E7F4">
 <br>
 <br>
 <br>
@@ -62,16 +61,6 @@ Filters
 </div>
 </form>
 
-
-
-
-<!-- 
-          <input type="submit" value="Chewse This Movie" id="choose-movie">
-</input>
-        <a href="" id="youtube-link"><input type="submit" value="Watch This Movie On YouTube"></a>
- --><!-- 
-        <div id="youtube" style="display:none">
-  <a href="" id="youtube-link" target="_blank"><input type="submit" value="Watch This Movie On YouTube"></a> -->
 <br>
 <div class="row">
 {% for movie in movies %}
@@ -90,10 +79,10 @@ Filters
 <div class="card card-cascade wider reverse col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-6 p-1 m-1">
 
   <!-- Card image -->
-  <div class="view view-cascade overlay m-1">
+  <div class="view view-cascade overlay">
        <img class="card-img-top" src="{{ movie_image }}">
     <a href="{{ movie_url }}" target="_blank">
-      <div class="mask flex-center rgba-white-light"><p class="white-text" style="font-size:20px;">CLICK FOR MORE INFO</p></div>
+      <div class="mask flex-center rgba-white-light"><p class="white-text" style="font-size:20px;">CLICK FOR MOVIE INFO</p></div>
     </a>
   </div>
 
@@ -104,27 +93,58 @@ Filters
           <h4 class="card-title" style="font-size:20px; font-family: 'Cabin Sketch', cursive;">{{ movie_name }}</h4>
 
     <!-- Subtitle -->
-    <h6 class="font-weight-bold indigo-text py-2">SYNOPSIS</h6>
+    <h6 class="font-weight-bold py-2" style="color: #399B80">synopsis</h6>
     <!-- Text -->
     <p class="card-text">{{ movie_overview }}
     </p>
 
 
   </div>
-  <div class="card-tail text-center m-1 p-1">
-            <form action="/save_activity">
-              <button type="button" class="btn btn-outline-info waves-effect text-center" id="choose-movie" style="border-radius:20px">chewse this movie</button>
-         <input type="hidden" name="movie" value="{{ movie_url, movie_image, movie_name, movie_id }}"></input>
-       </form>
+      <div class="card-tail text-center m-1 p-1">
+        <form action="/save_activity">
+          <button type="button" class="btn btn-outline-default waves-effect text-center" id="choose-movie" style="border-radius:20px; font-family: 'Cabin Sketch', cursive;">chewse this movie</button>
+          <input type="hidden" name="movie" value="{{ movie_url, movie_image, movie_name, movie_id }}"></input>
+          <input type="hidden" name="movie" value="{{ movie_name }}" id="movie-name">
+        </form>
+          <button type="button" class="btn btn-rounded waves-effect" style="color: red; border-radius:500px; display:none" data-toggle="modal" data-target="#exampleModal" id="youtube">
+            <i class="fab fa-youtube"></i>
+          </button>
+          <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ movie_name }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="embed-responsive embed-responsive-4by3">
+  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/-r33R82vOEc" allowfullscreen id="youtube-link"></iframe>
+</div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
      </div>
 </div>
+
+
+
+
+
+
 
 <!-- Card -->
 {% endfor %}
 </div>
 
-</div>
-<script src="/static/movie_update.js"></script>
+<!-- #background color
+ -->
+ <script src="/static/movie_update.js"></script>
 
 {% endblock %}
 

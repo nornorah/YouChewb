@@ -338,6 +338,7 @@ def save_activity():
                                 recipe_id=recipe_id, date=date_today)
             db.session.add(new_entry)
             db.session.commit()
+            flash("Activity successfully saved!", 'alert-success')
 
     return ('', 204)
 
