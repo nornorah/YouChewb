@@ -1,20 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<div style="background-color:#D6E7F4">
 <br>
 <br>
 <br>
-Get a Recommendation by:
-<br>
+<h3>Get a Recommendation by:</h3>
 <button class="movie-title-search" value="movie-title-search">
 Typing in a Movie Title</button>
+
 <div id="movie-title" style="display:none">
+  <form action="/display_movie_rec_by_search" class="form-inline md-form form-sm">
+  <input class="form-control form-control-sm mr-3 w-40" type="text" placeholder="movie title" name="search" style="z-index: 9999">
+  <i class="fas fa-search" aria-hidden="true"></i>
+  <input type="submit" id="movie-search"></input>
+  </form>
 
-<form action="/display_movie_rec_by_search">
-
-    <input type="text" id="search" name="search"></input>
-    <input type="submit" id="movie-search"></input>
 </div>
 </form>
 <button class="movie-filter-search" value="filters">
@@ -62,30 +63,7 @@ Filters
 </form>
 
 
-        {% for movie in movies %}
 
-        {% set movie_url = "https://www.themoviedb.org/movie/"+movie['id']|string %}        
-        {% if movie['poster_path'] %}
-        {% set movie_image = "https://image.tmdb.org/t/p/w500/"+movie['poster_path'] %}
-        {% else %}
-        {% set movie_image = "https://anest.ufl.edu/files/2015/04/No_image_available.jpg" %}
-        {% endif %}
-        {% set movie_name = movie['title'] %}
-        {% set movie_id = movie['id'] %}
-        {% set movie_overview = movie['overview'] %}
-
-          <a href="{{ movie_url }}">
-            <img src="{{ movie_image }}">
-          </a>
-          <br>
-          <div id="movie-name">
-          {{ movie_name }}
-          </div>
-          <br>
-          Synopsis:
-          <br>
-          {{ movie_overview }}
-          <br>
 
 <!-- 
           <input type="submit" value="Chewse This Movie" id="choose-movie">
@@ -94,17 +72,58 @@ Filters
  --><!-- 
         <div id="youtube" style="display:none">
   <a href="" id="youtube-link" target="_blank"><input type="submit" value="Watch This Movie On YouTube"></a> -->
-  <form action="/save_activity">
-    <input type="submit" value="Chewse This Movie" id="choose-movie">
-         <input type="hidden" name="movie" value="{{ movie_url, movie_image, movie_name, movie_id }}"></input>
-  </form>
 <br>
+<div class="row">
+{% for movie in movies %}
 
-       
-<!--  <br>
-      </ul> -->
-      {% endfor %}
+{% set movie_url = "https://www.themoviedb.org/movie/"+movie['id']|string %}        
+{% if movie['poster_path'] %}
+{% set movie_image = "https://image.tmdb.org/t/p/w500/"+movie['poster_path'] %}
+{% else %}
+{% set movie_image = "https://anest.ufl.edu/files/2015/04/No_image_available.jpg" %}
+{% endif %}
+{% set movie_name = movie['title'] %}
+{% set movie_id = movie['id'] %}
+{% set movie_overview = movie['overview'] %}
 
+<!-- Card -->
+<div class="card card-cascade wider reverse col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-6 p-1 m-1">
+
+  <!-- Card image -->
+  <div class="view view-cascade overlay m-1">
+       <img class="card-img-top" src="{{ movie_image }}">
+    <a href="{{ movie_url }}" target="_blank">
+      <div class="mask flex-center rgba-white-light"><p class="white-text" style="font-size:20px;">CLICK FOR MORE INFO</p></div>
+    </a>
+  </div>
+
+  <!-- Card content -->
+  <div class="card-body card-body-cascade text-center">
+
+    <!-- Title -->
+          <h4 class="card-title" style="font-size:20px; font-family: 'Cabin Sketch', cursive;">{{ movie_name }}</h4>
+
+    <!-- Subtitle -->
+    <h6 class="font-weight-bold indigo-text py-2">SYNOPSIS</h6>
+    <!-- Text -->
+    <p class="card-text">{{ movie_overview }}
+    </p>
+
+
+  </div>
+  <div class="card-tail text-center m-1 p-1">
+            <form action="/save_activity">
+              <button type="button" class="btn btn-outline-info waves-effect text-center" id="choose-movie" style="border-radius:20px">chewse this movie</button>
+         <input type="hidden" name="movie" value="{{ movie_url, movie_image, movie_name, movie_id }}"></input>
+       </form>
+     </div>
+</div>
+
+<!-- Card -->
+{% endfor %}
+</div>
+
+</div>
 <script src="/static/movie_update.js"></script>
 
 {% endblock %}

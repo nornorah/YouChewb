@@ -46,13 +46,10 @@ def get_edamam_payload():
     dietary = request.args.get("dietary")
     health = request.args.getlist("health[]")
 
-    # integer = randint(0,50)
+    integer = randint(0,50)
 
     payload = {'q': "", 'app_id': EDAMAM_ID, 'app_key': EDAMAM_KEY, 'health': 'alcohol-free',
-                'calories': f'{randint(600,1500)}-{randint(3000,6000)}','from': 0, 'to': 100}
-
-    print(payload)
-
+                'calories': f'{randint(600,1500)}-{randint(3000,6000)}','from': integer, 'to': integer+99}
     if dietary:
         payload.update({'diet': dietary})
     if health:
@@ -267,7 +264,6 @@ def movie_results():
                                 params=payload)
         data = movie_recc.json()
         movies.append(data['results'])
-    print(movies)
 
     return render_template("random_movies_search.html", movies=movies[0])
 
@@ -293,8 +289,6 @@ def movie_results_by_filter():
     response = requests.get(MOVIEDB_URL + "discover/movie", params=payload)
     data = response.json()
     movies = data['results']
-
-    print(movies)
 
     return render_template("random_movies_search.html", movies=movies)
 
@@ -523,3 +517,30 @@ if __name__ == "__main__":
     DebugToolbarExtension(app)
 
     app.run(host="0.0.0.0")
+
+
+#   <div class="row">
+
+#   {% for recipe_row in recipes | batch(4, '&nbsp;') %}
+
+#         {% for recipe in recipe_row %}
+#     {% set recipe_url = recipe['url'] %}
+#     {% set recipe_image = recipe['image'] %}
+#     {% set recipe_name = recipe['label'] %}
+#     {% set recipe_id = recipe['uri'][-32:] %}
+
+#     <form action="/save_recipe">
+#   <div class="span3 col-xs-">
+#     <a href="{{ recipe['url'] }}" target="_blank"><img src="{{ recipe['image'] }}"></a><br> <p style="font-size:14px; text-align:center">{{ recipe['label'] }}</p>
+#   </div>
+
+#           <input type="submit" value="Chewse This and Show Me Movies to Watch">
+#           <input type="hidden" name="recipe" value="{{ recipe_url, recipe_image, recipe_name, recipe_id }}"></input>
+#     </form>
+
+#     {% endfor %}
+
+# {% endfor %}
+# </div>
+
+

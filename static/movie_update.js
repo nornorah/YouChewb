@@ -24,3 +24,21 @@ $(document).ready(function() {
         });
 
     });
+
+// <div class="container-fluid page-top">
+
+// <div class="card col-xl-2 col-lg-3 col-md-4 col-s-6 col-xs-6">
+
+//     <div class="card-image waves-effect waves-block waves-light">
+//       <img class="activator" src="{{ recipe_image }}">
+//     </div>
+//     <div class="card-content">
+//       <span class="card-title activator grey-text text-darken-4" style="font-size:16px; font-family: 'Staatliches', cursive;">{{ recipe_name }}<i class="material-icons right">more_vert</i></span>
+//       <p><a href="{{ recipe['url'] }}" style="color: #757575">cooking instructions</a></p>
+//     </div>
+//     <div class="card-reveal">
+//       <span class="card-title grey-text text-darken-4">{{ recipe['label'] }}<i class="material-icons right">close</i></span>
+//       <p>You'll need: <br>
+//       {{ '; '.join(recipe['ingredientLines']) }}</p>
+//     </div>
+//   </div>
