@@ -20,9 +20,9 @@
   <!-- Card image -->
   <div class="view overlay my-4 text-center">
     <img src="{{ recipe.recipe_image }}" class="img-fluid mx-auto d-block" id="recipe-img" style="width:400px; height:450px">
-    <a href="{{ recipe.recipe_url }}" id="recipe-url">
-      <div class="mask rgba-white-slight"></div>
-    </a>
+    <a href="{{ recipe.recipe_url }}" target="_blank">
+      <div class="mask flex-center rgba-white-light"><p class="white-text" style="font-size:20px;">INSTRUCTIONS</p></div>
+     </a>
   </div>
 </div>
 <!-- Jumbotron -->
@@ -35,9 +35,9 @@
   <!-- Card image -->
   <div class="view overlay my-4 text-center">
     <img src="{{ movie.movie_image }}" class="img-fluid mx-auto d-block" id="movie-img" style="width:400px; height:450px">
-    <a href="{{ movie.movie_url }}" id="movie-url">
-      <div class="mask rgba-white-slight"></div>
-    </a>
+     <a href="{{ movie.movie_url }}" target="_blank">
+       <div class="mask flex-center rgba-white-light"><p class="white-text" style="font-size:20px;">INFORMATION</p></div>
+     </a>
   </div>
 
 </div>

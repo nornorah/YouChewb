@@ -402,8 +402,8 @@ def save_recipe():
     # response = requests.get(MOVIEDB_URL + "discover/movie", params=payload)
     # data = response.json()
     # movies = data['results']
-
-    return redirect('/display_movie_rec_by_filters')
+    flash("Recipe successfully saved!", 'alert-success')
+    return redirect('/display_random_recipes')
 
 """++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"""
 

@@ -1,55 +1,60 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<br>
-<br>
 <div class="row">
-
 {% for date, recipe, movie in activity_info %}
-
-<h4 style="font-family: 'Cabin Sketch', cursive;">{{ date }}
-<div class="card card-cascade wider reverse col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 m-1 p-1">
+<!-- Jumbotron -->
+<div class="jumbotron text-center col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+<div>
+  <!-- Title -->
+  <h4 class="card-title h4 pb-2" style="font-family: 'Cabin Sketch', cursive;"><strong>{{ date }}</strong></h4>
 
   <!-- Card image -->
-  <div class="view view-cascade overlay">
-    <img class="card-img-top" src="{{ recipe.recipe_image }}">
+  <div class="view overlay my-4">
+
+<div class="card card-cascade wider reverse m-1 p-1">
+
+  <!-- Card image -->
+   <div class="view view-cascade overlay">
+    <img class="card-img-top" src="{{ recipe.recipe_image }}">     
     <a href="{{ recipe.recipe_url }}" target="_blank">
       <div class="mask flex-center rgba-white-light"><p class="white-text" style="font-size:20px;">INSTRUCTIONS</p></div>
-    </a>
-  </div>
-  <!-- Card content -->
-  <div class="card-body card-body-cascade text-center">
-
-    <!-- Title -->
-    <h4 class="card-title" style="font-size:20px; font-family: 'Cabin Sketch', cursive;">{{ recipe.recipe_name }}</h4>
-    </p>
+     </a>
 </div>
-
-  </div>
-  <div class="card card-cascade wider reverse col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 m-1 p-1">
-
-  <!-- Card image -->
-  <div class="view view-cascade overlay">
-    <img class="card-img-top" src="{{ movie.movie_image }}">
-    <a href="{{ movie.movie_url }}" target="_blank">
-      <div class="mask flex-center rgba-white-light"><p class="white-text" style="font-size:20px;">INFORMATION</p></div>
-    </a>
-  </div>
-
   <!-- Card content -->
   <div class="card-body card-body-cascade text-center">
 
-    <!-- Title -->
+     <!-- Title -->
+     <h4 class="card-title" style="font-size:20px; font-family: 'Cabin Sketch', cursive;">{{ recipe.recipe_name }}</h4>
+ </div>
+</div>
+</div>
+   <div class="card card-cascade wider reverse m-1 p-1">
+
+   <!-- Card image -->
+   <div class="view view-cascade overlay">
+     <img class="card-img-top" src="{{ movie.movie_image }}">
+     <a href="{{ movie.movie_url }}" target="_blank">
+       <div class="mask flex-center rgba-white-light"><p class="white-text" style="font-size:20px;">INFORMATION</p></div>
+     </a>
+  </div>
+
+   <!-- Card content -->
+  <div class="card-body card-body-cascade text-center">
+
+     <!-- Title -->
     <h4 class="card-title" style="font-size:20px; font-family: 'Cabin Sketch', cursive;">{{ movie.movie_name }}</h4>
     </p>
 
   </div>
+ </div>
 
+<!-- Jumbotron -->
 </div>
-
-
+</div>
+</div>
 {% endfor %}
+</div>
 </div>
 
 {% endblock %}

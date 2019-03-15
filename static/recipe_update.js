@@ -17,6 +17,7 @@ $(document).ready(function() {
 
     $("#recipe-no").click( function() {
         $("#dietary").show();
+        $('#start').hide()
     });
 
     $(".dietary").click(function() {
@@ -76,6 +77,8 @@ $(document).ready(function() {
 
         $("#recipe-yes").click(function() {
         $("#movie").show();
+        $('#start').hide() 
+        $('#movie-text').show();       
         });
 
     let genre = null;

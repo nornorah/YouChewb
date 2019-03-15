@@ -1,17 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-Search by Recipe Name or Ingredients:
+<br>
+<br>
+<br>
 
 <form action="/display_recipe_search_results" class="form-inline md-form form-sm">
-  <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="recipe name or ingredients" name="search" style="z-index: 9999">
-  <i class="fas fa-search" aria-hidden="true"></i>
+  <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search by recipe name or by ingredients   Try 'chicken parmesan' or 'onions, shrimp' (ingredients must be separated by commas)" name="search" style="z-index: 9999">
+    <button type="submit" style="background: none;padding: 0px;border: none;"><i class="fas fa-search" aria-hidden="true"></i></button>
 </form>
-
-    <br>
-    Try "chicken parmesan" or "onions, shrimp" (ingredients must be separated by commas)
-    <br>
-    <br>
 Filter by:
 <br>
 Calories:
@@ -68,11 +65,16 @@ Dietary Restrictions:
     <!-- Title -->
     <h4 class="card-title" style="font-size:20px; font-family: 'Cabin Sketch', cursive;">{{ recipe_name }}</h4>
     <!-- Subtitle -->
-    <h6 class="font-weight-bold indigo-text py-1">you'll need...</h6>
+    <h6 class="font-weight-bold py-1" style="color: #399B80">you'll need...</h6>
     <!-- Text -->
     <p class="card-text">{{ recipe_ing }}
     </p>
-
+<div class="card-tail text-center m-1 p-1">
+        <form action="/save_recipe">
+          <button type="button" class="btn btn-outline-default waves-effect text-center" style="border-radius:20px; font-family: 'Cabin Sketch', cursive;">chewse this recipe</button>
+          <input type="hidden" name="recipe" value="{{ recipe_url, recipe_image, recipe_name, recipe_id }}"></input>
+        </form>
+      </div>
   </div>
 </div>
 
