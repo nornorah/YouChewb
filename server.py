@@ -232,7 +232,7 @@ def display_recipe_search_results():
         payload.update({'diet': dietary})
     if health:
         payload.update({'health': health})
-
+    print(payload)
     recipes = request_edamam_api(payload)
 
     return render_template("random_recipes_search.html", recipes=recipes)
@@ -499,11 +499,18 @@ def display_activity():
     """Display recipe and movie choice from today"""
 
     recipe_id = session.get("recipe_id")
+    print(recipe_id)
     movie_id = session.get("movie_id")
     recipes = Recipe.query.filter_by(recipe_id=recipe_id).first()
     movies = Movie.query.filter_by(movie_id=movie_id).first()
-
-    return render_template("display_activity.html", recipe=recipes, movie=movies)
+    if recipes==None:
+        flash("You have not yet chosen a recipe for the day! Please choose a recipe.", 'alert-danger')
+        return redirect("/")
+    elif movies==None:
+        flash("You have not yet chosen a movie for the day! Please choose a movie.", 'alert-danger')
+        return redirect("/")
+    else:
+        return render_template("display_activity.html", recipe=recipes, movie=movies)
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point
@@ -515,7 +522,7 @@ if __name__ == "__main__":
     connect_to_db(app)
 
     # Use the DebugToolbar
-    DebugToolbarExtension(app)
+    # DebugToolbarExtension(app)
 
     app.run(host="0.0.0.0")
 
@@ -544,4 +551,61 @@ if __name__ == "__main__":
 # {% endfor %}
 # </div>
 
+
+
+
+
+
+
+
+
+# <br>
+# <br>
+# <div class="row">
+
+# {% for date, recipe, movie in activity_info %}
+
+# <h4 style="font-family: 'Cabin Sketch', cursive;">{{ date }}</h4>
+# <div class="card card-cascade wider reverse col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 m-1 p-1">
+
+#   <!-- Card image -->
+#   <div class="view view-cascade overlay">
+#     <img class="card-img-top" src="{{ recipe.recipe_image }}">
+#     <a href="{{ recipe.recipe_url }}" target="_blank">
+#       <div class="mask flex-center rgba-white-light"><p class="white-text" style="font-size:20px;">INSTRUCTIONS</p></div>
+#     </a>
+#   </div>
+#   <!-- Card content -->
+#   <div class="card-body card-body-cascade text-center">
+
+#     <!-- Title -->
+#     <h4 class="card-title" style="font-size:20px; font-family: 'Cabin Sketch', cursive;">{{ recipe.recipe_name }}</h4>
+#     </p>
+# </div>
+
+#   </div>
+#   <div class="card card-cascade wider reverse col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 m-1 p-1">
+
+#   <!-- Card image -->
+#   <div class="view view-cascade overlay">
+#     <img class="card-img-top" src="{{ movie.movie_image }}">
+#     <a href="{{ movie.movie_url }}" target="_blank">
+#       <div class="mask flex-center rgba-white-light"><p class="white-text" style="font-size:20px;">INFORMATION</p></div>
+#     </a>
+#   </div>
+
+#   <!-- Card content -->
+#   <div class="card-body card-body-cascade text-center">
+
+#     <!-- Title -->
+#     <h4 class="card-title" style="font-size:20px; font-family: 'Cabin Sketch', cursive;">{{ movie.movie_name }}</h4>
+#     </p>
+
+#   </div>
+
+# </div>
+
+
+# {% endfor %}
+# </div>
 

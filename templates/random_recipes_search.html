@@ -6,39 +6,42 @@
 <br>
 
 <form action="/display_recipe_search_results" class="form-inline md-form form-sm">
-  <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search by recipe name or by ingredients   Try 'chicken parmesan' or 'onions, shrimp' (ingredients must be separated by commas)" name="search" style="z-index: 9999">
-    <button type="submit" style="background: none;padding: 0px;border: none;"><i class="fas fa-search" aria-hidden="true"></i></button>
+  <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search by recipe name or by ingredients... Try 'chicken parmesan' or 'onions, shrimp' (ingredients must be separated by commas)" name="search" style="color: white">
+    <button type="submit" style="background: none;padding: 0px;border: none;"><i class="fas fa-search" aria-hidden="true" style="color:white"></i></button>
 </form>
-Filter by:
-<br>
-Calories:
-<br>
-<select name="calories" id="calories">
-    <option disabled selected value> -- Select an Option -- </option>    
-    <option value="500">Less than 500 calories</option>
-    <option value="1000">Less than 1000 calories</option>
-    <option value="1500">Less than 1500 calories</option>
-    <option value="2000">Less than 2000 calories</option>
-    <option value="10000">Greater than 2000 calories</option>
-</select>
-<br>
-Dietary Preference:
-<br>
-<select name="dietary" id="dietary">
-    <option disabled selected value> -- Select an Option -- </option>
-    <option value="balanced">Balanced</option>
-    <option value="low-fat">Low-Fat</option>
-    <option value="low-carbs">Low-Carbs</option>
-</select>
-<br>
-Dietary Restrictions:
-<br>
-  <input type="checkbox" value="peanut-free" name="health">Peanut-Free</option>
-  <input type="checkbox" value="vegetarian" name="health">Vegetarian</option>
-</select>
-<br>
+
+<form action="/display_movie_rec_by_filters"> 
+<div class="btn-group">
+  <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius:50px; color:#2f4951; font-family: 'Itim', cursive;">Calories</button>
+  <div class="dropdown-menu dropdown-menu-right" name="calories">
+    <button class="dropdown-item" type="button" value="500">0-500 Calories</button>
+    <button class="dropdown-item" type="button" value="1000">501-1000 Calories</button>
+    <button class="dropdown-item" type="button" value="1500">1001-1500 Calories</button>
+    <button class="dropdown-item" type="button" value="2000">1501-2000 Calories</button>
+    <button class="dropdown-item" type="button" value="10000">2000+ Calories</button>
+  </div>
+  </div>
+<div class="btn-group">
+
+  <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius:50px; color:#2f4951; font-family: 'Itim', cursive;">Dietary Preference</button>
+  
+  <div class="dropdown-menu dropdown-menu-right" name="dietary">
+    <button class="dropdown-item" type="button" value="balanced">Balanced</button>
+    <button class="dropdown-item" type="button" value="low-fat">Low-Fat</button>
+    <button class="dropdown-item" type="button" value="low-carbs">Low-Carbs</button>
+  </div>
+    </div>
+<div class="btn-group">
+
+  <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius:50px; color:#2f4951; font-family: 'Itim', cursive;">Dietary Restrictions </button>
+<div class="dropdown-menu dropdown-menu-right" name="health">
+  <button class="dropdown-item" type="button" value="peanut-free">Peanut-Free</button>
+    <button class="dropdown-item" type="button" value="vegetarian">Vegetarian</button>
+</div>
+    </div>
 
 </form>
+
 <div class="row">
   {% for recipe in recipes %}
   {% set recipe_url = recipe['url'] %}
@@ -67,8 +70,8 @@ Dietary Restrictions:
     <!-- Subtitle -->
     <h6 class="font-weight-bold py-1" style="color: #399B80">you'll need...</h6>
     <!-- Text -->
-    <p class="card-text">{{ recipe_ing }}
-    </p>
+    <p class="card-text">{{ recipe_ing }}</p>
+  </div>
 <div class="card-tail text-center m-1 p-1">
         <form action="/save_recipe">
           <button type="button" class="btn btn-outline-default waves-effect text-center" style="border-radius:20px; font-family: 'Cabin Sketch', cursive;">chewse this recipe</button>
@@ -76,7 +79,6 @@ Dietary Restrictions:
         </form>
       </div>
   </div>
-</div>
 
 <!-- Card -->
 {% endfor %}

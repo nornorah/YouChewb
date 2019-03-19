@@ -1,18 +1,17 @@
 "use strict";
 
 $(document).ready(function() {
-    $('.movie-title-search').click(function() {
+    $('#movie-title-search').click(function() {
         $('#movie-title').show()
         $('#movie-filter').hide()
 
     });
-    $('.movie-filter-search').click(function() {
+    $('#movie-filter-search').click(function() {
         $('#movie-filter').show()
         $('#movie-title').hide()
     });
 
-    $('#choose-movie').click(function(evt) {
-        evt.preventDefault();
+    $('#choose-movie').click(function() {
         $('#youtube').show()
 
         let formData = {'q': $('#movie-name').val()};

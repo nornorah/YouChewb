@@ -4,64 +4,99 @@
 <br>
 <br>
 <br>
-<h3>Get a Recommendation by:</h3>
-<button class="movie-title-search" value="movie-title-search">
-Typing in a Movie Title</button>
 
-<div id="movie-title" style="display:none">
-  <form action="/display_movie_rec_by_search" class="form-inline md-form form-sm">
-  <input class="form-control form-control-sm mr-3 w-40" type="text" placeholder="movie title" name="search" style="z-index: 9999">
- <button type="submit" style="background: none;padding: 0px;border: none;"><i class="fas fa-search" aria-hidden="true"></i></button></input>
-  </form>
+  <button type="button" class="btn btn-light waves-effect text-center" style="border-radius:50px; font-family: 'Itim', cursive;" id="movie-title-search">recommendation by movie title</button>
 
-</div>
-</form>
-<button class="movie-filter-search" value="filters">
-Filters
+  <button type="button" class="btn btn-light waves-effect text-center" style="border-radius:50px; font-family: 'Itim', cursive;" id="movie-filter-search">recommendation by filters</button>
 </button>
-    <br>
-<form action="/display_movie_rec_by_filters">
-<div id="movie-filter" style="display:none">
 
-    Genre:
-      <input type="checkbox" class="genre" value="action" name="genre">Action</input>
-      <input type="checkbox" class="genre" value="adventure" name="genre">Adventure</input>
-      <input type="checkbox" class="genre" value="animation" name="genre">Animation</input>
-      <input type="checkbox" class="genre" value="comedy" name="genre">Comedy</input>
-      <br>
-      <input type="checkbox" class="genre" value="crime" name="genre">Crime</input>
-      <input type="checkbox" class="genre" value="documentary" name="genre">Documentary</input>
-      <input type="checkbox" class="genre" value="drama" name="genre">Drama</input>
-      <input type="checkbox" class="genre" value="family" name="genre">Family</input>
-      <br>
-      <input type="checkbox" class="genre" value="fantasy" name="genre">Fantasy</input>
-      <input type="checkbox" class="genre" value="war" name="genre">War</input>
-      <input type="checkbox" class="genre" value="horror" name="genre">Horror</input>
-      <input type="checkbox" class="genre" value="mystery" name="genre">Mystery</input>
-      <br>
-      <input type="checkbox" class="genre" value="romance" name="genre">Romance</input>
-      <input type="checkbox" class="genre" value="science fiction" name="genre">Sci-Fi</input>
-      <input type="checkbox" class="genre" value="thriller" name="genre">Thriller</input>      
-      <input type="checkbox" class="genre" value="history" name="genre">History</input>  
-      <br>
-        Year Released:
-        <br>
-<!--         <input type="radio" class="year" value="1970" name="year">Released after 1970</input>
-        <input type="radio" class="year" value="1980" name="year">Released after 1980</input>
-        <input type="radio" class="year" value="1990" name="year">Released after 1990</input>
-        <br>
-        <input type="radio" class="year" value="2000" name="year">Released after 2000</input>
-        <input type="radio" class="year" value="2010" name="year">Released after 2010</input> -->
+
+<div id="movie-title" style="display:none" style="color: #757575">
+  <form action="/display_movie_rec_by_search" class="form-inline md-form form-sm">
+  <input class="form-control form-control-sm mr-3 w-40" type="text" placeholder="Type a movie title..." name="search" style="z-index: 9999; margin-left:5%; color: white">
+ <button type="submit" style="background: none; padding: 0px; border: none;"><i class="fas fa-search" aria-hidden="true" style="color:white"></i></button></input>
+  </form>
+</div>
+<form action="/display_movie_rec_by_filters">
+<div id="movie-filter" style="display:none; margin-left:5%">
+<!--     <button type="button" class="btn btn-rounded waves-effect text-center" style="border-radius:50px; color:#757575; font-family: 'Itim', cursive;">Genre</button> -->
+<p style="font-family: 'Cabin Sketch', cursive; color: white">GENRE:</p>
+
+    <input type="checkbox" name="genre" value="action" id="checkbox"> <label for="checkbox" style="color:white">Action</label></input>
+    <input type="checkbox" name="genre" value="adventure"> <label for="checkbox" style="color:white">Adventure</label></input>
+    <input type="checkbox" name="genre" value="animation"> <label for="checkbox" style="color:white">Animation</label></input>
+    <input type="checkbox" name="genre" value="comedy"> <label for="checkbox" style="color:white">Comedy</label></input>
+    <br>
+    <input type="checkbox" name="genre" value="crime"> <label for="checkbox" style="color:white">Crime</label></input>
+    <input type="checkbox" name="genre" value="documentary"> <label for="checkbox" style="color:white">Documentary</label></input>
+    <input type="checkbox" name="genre" value="drama"> <label for="checkbox" style="color:white">Drama</label></input>
+    <input type="checkbox" name="genre" value="family"> <label for="checkbox" style="color:white">Family</label></input>
+    <br>
+    <input type="checkbox" name="genre" value="fantasy"> <label for="checkbox" style="color:white">Fantasy</label></input>
+    <input type="checkbox" name="genre" value="history"> <label for="checkbox" style="color:white">History</label></input>
+    <input type="checkbox" name="genre" value="horror"> <label for="checkbox" style="color:white">Horror</label></input>
+    <input type="checkbox" name="genre" value="mystery"> <label for="checkbox" style="color:white">Mystery</label></input>
+    <br>
+    <input type="checkbox" name="genre" value="romance"> <label for="checkbox" style="color:white">Romance</label></input>
+    <input type="checkbox" name="genre" value="science-fiction"> <label for="checkbox" style="color:white">Science Fiction</label></input>
+    <input type="checkbox" name="genre" value="thriller"> <label for="checkbox" style="color:white">Thriller</label></input>
+    <input type="checkbox" name="genre" value="war"> <label for="checkbox" style="color:white">War</label></input>
+    <br>
+
+<!--     <div class="custom-control custom-checkbox custom-control-inline">
+      <input type="checkbox" class="custom-control-input" value="action" name="genre" id="defaultInline1">
+      <label class="custom-control-label" for="defaultInline1">Action</label>
+      <input type="checkbox" class="custom-control-input" value="adventure" name="genre" id="defaultInline2">      
+      <label class="custom-control-label" for="defaultInline2">Adventure</label>
+      <input type="checkbox" class="custom-control-input" value="animation" name="genre" id="defaultInline3">
+      <label class="custom-control-label" for="defaultInline3">Animation</label>      
+      <input type="checkbox" class="custom-control-input" value="comedy" name="genre" id="defaultInline4">
+      <label class="custom-control-label" for="defaultInline4">Comedy</label>
+    </div>
+   <br>
+    <div class="custom-control custom-checkbox custom-control-inline">
+      <input type="checkbox" class="custom-control-input" value="crime" name="genre" id="defaultInline5">
+      <label class="custom-control-label" for="defaultInline5">Crime</input></label>
+      <input type="checkbox" class="custom-control-input" value="documentary" name="genre" id="defaultInline6">      
+      <label class="custom-control-label" for="defaultInline6">Documentary</input></label>
+      <input type="checkbox" class="custom-control-input" value="drama" name="genre" id="defaultInline7">
+      <label class="custom-control-label" for="defaultInline7">Drama</input></label>      
+      <input type="checkbox" class="custom-control-input" value="family" name="genre" id="defaultInline8">
+      <label class="custom-control-label" for="defaultInline8">Family</input></label>
+  </div>
+  <br>
+    <div class="custom-control custom-checkbox custom-control-inline">
+      <input type="checkbox" class="custom-control-input" value="fantasy" name="genre" id="defaultInline9">
+      <label class="custom-control-label" for="defaultInline9">Fantasy</input></label>
+      <input type="checkbox" class="custom-control-input" value="war" name="genre" id="defaultInline10">      
+      <label class="custom-control-label" for="defaultInline10">War</input></label>
+      <input type="checkbox" class="custom-control-input" value="horror" name="genre" id="defaultInline11">
+      <label class="custom-control-label" for="defaultInline11">Horror</input></label>      
+      <input type="checkbox" class="custom-control-input" value="mystery" name="genre" id="defaultInline12">
+      <label class="custom-control-label" for="defaultInline12">Mystery</input></label>
+  </div>
+  <br>
+      <div class="custom-control custom-checkbox custom-control-inline">
+      <input type="checkbox" class="custom-control-input" value="romance" name="genre" id="defaultInline13">
+      <label class="custom-control-label" for="defaultInline13">Romance</input></label>
+      <input type="checkbox" class="custom-control-input" value="science-fiction" name="genre" id="defaultInline14">      
+      <label class="custom-control-label" for="defaultInline14">Science Fiction</input></label>
+      <input type="checkbox" class="custom-control-input" value="thriller" name="genre" id="defaultInline15">
+      <label class="custom-control-label" for="defaultInline15">Thriller</input></label>      
+      <input type="checkbox" class="custom-control-input" value="history" name="genre" id="defaultInline16">
+      <label class="custom-control-label" for="defaultInline16">History</input></label>
+  </div> -->
+  <br>
+  <p style="font-family: 'Cabin Sketch', cursive; color:white">YEAR RELEASED:</p>
         <input type="text" id="gte" placeholder="Released after" class="year" name="gte">
         <input type="text" id="lte" placeholder="Released before" class="year" name="lte">        
         <br>
         <input type="submit" id="movie-search"></input>
-
 </div>
 </form>
 
 <br>
-<div class="row">
+<div class="row" style="padding:0; margin:0">
 {% for movie in movies %}
 
 {% set movie_url = "https://www.themoviedb.org/movie/"+movie['id']|string %}        
@@ -75,7 +110,7 @@ Filters
 {% set movie_overview = movie['overview'] %}
 
 <!-- Card -->
-<div class="card card-cascade wider reverse col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-6 p-1 m-1">
+<div class="card card-cascade wider reverse col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 p-1 m-1" style="background-color:rgb(222,228,236); padding:0; margin:0">
 
   <!-- Card image -->
   <div class="view view-cascade overlay">
@@ -99,9 +134,11 @@ Filters
 
 
   </div>
+
       <div class="card-tail text-center m-1 p-1">
+
         <form action="/save_activity">
-          <button type="button" class="btn btn-outline-default waves-effect text-center" id="choose-movie" style="border-radius:20px; font-family: 'Cabin Sketch', cursive;">chewse this movie</button>
+          <button type="button" class="btn btn-outline-dark waves-effect text-center" id="choose-movie" style="border-radius:20px; font-family: 'Cabin Sketch', cursive;">chewse this movie</button>
           <input type="hidden" name="movie" value="{{ movie_url, movie_image, movie_name, movie_id }}"></input>
           <input type="hidden" name="movie" value="{{ movie_name }}" id="movie-name">
         </form>
@@ -117,25 +154,18 @@ Filters
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
       <div class="modal-body">
         <div class="embed-responsive embed-responsive-4by3">
-  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/-r33R82vOEc" allowfullscreen id="youtube-link"></iframe>
-</div>
+        <iframe class="embed-responsive-item" src="" allowfullscreen id="youtube-link"></iframe>
+        </div>
 
       </div>
-
+      </div>
+      </div>
+      </div>
     </div>
-  </div>
-</div>
      </div>
 </div>
-
-
-
-
-
-
 
 <!-- Card -->
 {% endfor %}

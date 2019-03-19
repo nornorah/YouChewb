@@ -1,15 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/static/recipe_movie.css">
-</head>
 <br>
 <br>
 <br>
-<h4 style="font-family: 'Finger Paint', cursive; text-align:left" id="start">let's start with the recipe...</h4>
-<h4 style="font-family: 'Finger Paint', cursive; text-align:right; display:none" id="movie-text">and now for the movie...</h4>
+<h4 style="font-family: 'Finger Paint', cursive; text-align:left; color:rgb(222,228,236)" id="start" >let's start with the recipe...</h4>
+<h4 style="font-family: 'Finger Paint', cursive; text-align:right; display:none; color:rgb(222,228,236)" id="movie-text" >and now for the movie...</h4>
+
 <div class="row">
   {% set recipe_url = recipe['url'] %}
   {% set recipe_image = recipe['image'] %}
@@ -17,7 +14,7 @@
   {% set recipe_ing = ('; '.join(recipe['ingredientLines'])) %}
   {% set recipe_id = recipe['uri'][-32:] %}
 <!-- Jumbotron -->
-<div class="jumbotron text-center col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+<div class="jumbotron text-center col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12" style="background-color: rgb(222,228,236); border-radius: 20px">
 
   <!-- Title -->
   <h4 class="card-title h4 pb-2" id="recipe-name" style="font-family: 'Cabin Sketch', cursive;"><strong>{{ recipe_name }}</strong></h4>
@@ -32,28 +29,66 @@
 
 
   <p class="card-text" id="recipe-ingredients"><h5 style="color:#399B80">you'll need...</h5> {{ recipe_ing }}</p>
-      <div id="dietary" style="display:none">
-          Dietary Preference?
-          <br>
-          <button class="dietary" id="dietary1" value="balanced">Balanced</button>  
-          <button class="dietary" id="dietary2" value="low-carb">Low-Carb</button>
-          <br>
-          <button class="dietary" id="dietary3" value="low-fat">Low-Fat</button>
-          <button class="dietary" id="dietary4" value="">No Preference</button>            
-      </div>
+
+<div class="btn-group" id="dietary" style="display:none">
+  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius:20px; color:#757575; font-family: 'Itim', cursive;">Dietary Preference?</button>
+  <div class="dropdown-menu dropdown-menu-right" name="dietary">
+    <button class="dropdown-item" type="button" value="balanced">Balanced</button>
+    <button class="dropdown-item" type="button" value="low-fat">Low-Fat</button>
+    <button class="dropdown-item" type="button" value="low-carbs">Low-Carbs</button>
+    <button class="dropdown-item" type="button" value="">No Preference</button>
+  </div>
+</div>
+<!-- <div class="custom-control custom-radio custom-control-inline">
+  <input type="radio" class="custom-control-input" id="bal" value="balanced">
+  <label class="custom-control-label" for="bal">Balanced</label>
+</div>
+<div class="custom-control custom-radio custom-control-inline">
+  <input type="radio" class="custom-control-input" id="lowfat" value="low-fat">
+  <label class="custom-control-label" for="lowfat">Low-Fat</label>
+</div>
+<div class="custom-control custom-radio custom-control-inline">
+  <input type="radio" class="custom-control-input" id="low-carbs" value="low-carbs">
+  <label class="custom-control-label" for="low-carbs">Low-Carbs</label>
+</div>
+<div class="custom-control custom-radio custom-control-inline">
+  <input type="radio" class="custom-control-input" id="no-pref" value="">
+  <label class="custom-control-label" for="no-pref">No Preference</label>
+</div> -->
+
+
+
 
       <div id="peanut" style="display:none">
-        Peanut Allergies?
-          <button class="peanut" id="dietary5" value="peanut-free">Yes</button>  
-          <button class="peanut" id="dietary6" value="">No</button>
-      </div>    
+  <button class="btn btn-rounded" style="color:#757575; border-radius:50px; font-family: 'Itim', cursive;">Peanut Allergies?</button>
+<div class="custom-control custom-radio custom-control-inline" id="peanut">
+  <input type="radio" class="custom-control-input" id="peanut-yes" value="peanut-free">
+  <label class="custom-control-label" for="peanut-yes">YES</label>
+</div>
+
+<div class="custom-control custom-radio custom-control-inline">
+  <input type="radio" class="custom-control-input" id="peanut-no" value="">
+  <label class="custom-control-label" for="peanut-no">NO</label>
+</div>
+      </div>  
 
       <div id="vege" style="display:none">
-          Vegetarian?
-          <button class="vege" id="health1" value="vegetarian">Yes</button>
-          <button class="vege" id="health2" value="">No</button>
-      </div>  
+  <button class="btn btn-rounded" style="color:#757575; border-radius:50px; font-family: 'Itim', cursive;">Vegetarian?</button>
+<div class="custom-control custom-radio custom-control-inline" id="vege">
+  <input type="radio" class="custom-control-input" id="health1" value="vegetarian">
+  <label class="custom-control-label" for="health1">YES</label>
+</div>
+
+<div class="custom-control custom-radio custom-control-inline">
+  <input type="radio" class="custom-control-input" id="health2" value="">
+  <label class="custom-control-label" for="health2">NO</label>
+</div>
+      </div>      
+      
+<form action="/save_recipe">
     <button type="button" class="btn btn-outline-default waves-effect text-center" id="recipe-yes" style="border-radius:20px; font-family: 'Cabin Sketch', cursive;">chewse this recipe</button>
+    <input type="hidden" name="recipe" value="{{ recipe_url, recipe_image, recipe_name, recipe_id }}">
+</form>
             <button type="button" class="btn btn-outline-default waves-effect text-center" id="new-random-recipe" style="border-radius:20px; font-family: 'Cabin Sketch', cursive; display:none;">get a new recipe</button>
             <button type="button" class="btn btn-outline-default waves-effect text-center" id="recipe-no" style="border-radius:20px; font-family: 'Cabin Sketch', cursive;">filter more</button>
 </div>
@@ -71,7 +106,7 @@
 
 <!-- Jumbotron -->
 
-<div class="jumbotron text-center col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12" id="movie" style="display:none">
+<div class="jumbotron text-center col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12" id="movie" style="display:none; background-color: rgb(222,228,236); border-radius:20px">
 
   <!-- Title -->
   <h4 class="card-title h4 pb-2" id="movie-name" style="font-family: 'Cabin Sketch', cursive;"><strong>{{ movie_name }}</strong></h4>
@@ -85,10 +120,11 @@
   </div>
 
 
-  <p class="card-text" id="movie-overview"><h5 style="color:#399B80"> synopsis </h5>{{ movie_overview }}</p>
+  <h5 style="color:#399B80"> synopsis </h5><p class="card-text" id="movie-overview">{{ movie_overview }}</p>
+
       <div id="genre-checkbox" style="display:none">
-    Filter by Genre?
-    <br>
+ <button class="btn btn-rounded" style="color:#757575; border-radius:50px; font-family: 'Itim', cursive;">Genre</button>    
+<br>
       <input type="checkbox" class="genre" value="action">Action</input>
       <input type="checkbox" class="genre" value="adventure">Adventure</input>
       <input type="checkbox" class="genre" value="animation">Animation</input>
@@ -111,9 +147,11 @@
       <br>
     </div>
     <br>
+
+
     <div id="year-radio" style="display:none">
-        Filter by Year Released?
-        <br>
+ <button class="btn btn-rounded" style="color:#757575; border-radius:50px; font-family: 'Itim', cursive;">Year Released</button>        
+ <br>
         <input type="text" id="gte" placeholder="Released after" class="year">
         <input type="text" id="lte" placeholder="Released before" class="year">
         <input type="radio" class="year" value="" name="year">No Preference</input>
@@ -125,9 +163,10 @@
 
 
   <form action="/save_activity">
-    <a href="" id="youtube-link" target="_blank"><button type="button" class="btn btn-rounded waves-effect" style="color: red; border-radius:500px; display:none;"></button></a>
+    <a href="" target="_blank"><button type="button" class="btn btn-rounded waves-effect" style="border-radius:50px; display:none;" id="youtube-link"></button></a>
   </form>
-</div>
+</div jumbotron>
+
 <!-- Jumbotron -->
 </div>
 <script src="/static/recipe_update.js"></script>

@@ -20,17 +20,17 @@ $(document).ready(function() {
         $('#start').hide()
     });
 
-    $(".dietary").click(function() {
+    $("#dietary").click(function() {
     $("#peanut").show();
         dietary = $(this).val();
     });
 
-    $(".peanut").click(function() {
+    $("#peanut").click(function() {
         $("#vege").show();
         peanut = $(this).val();
     });
 
-    $(".vege").click(function() {
+    $("#vege").click(function() {
         vegetarian = $(this).val();
         $("#new-random-recipe").show()
         $("#recipe-no").hide()
@@ -65,6 +65,7 @@ $(document).ready(function() {
             };
         }
 
+        console.log(formData)
         $.get('/get_random_recipe', formData, (results) => {
         $('#recipe-url').attr('href', results.url);
         $('#recipe-img').attr('src', results.image);
@@ -122,14 +123,13 @@ $(document).ready(function() {
             $('#movie-url').attr('href', "https://www.themoviedb.org/movie/"+results.id);
             $('#movie-img').attr('src', "https://image.tmdb.org/t/p/w500/"+results.poster_path);
             $('#movie-name').html(results.title);
-            $('#movie-overview').html((results.overview))
+            $('#movie-overview').html(results.overview);
             $('#movie-yes').attr('html', "chewse this");
-
             });
         });
 
     $("#movie-yes").click(function() {
-        $("#youtube-link").show();
+        $("#youtube").show();
 
         let formData = {'q': $('#movie-name').html()};
 
