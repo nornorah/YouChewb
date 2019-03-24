@@ -1,5 +1,4 @@
 /* Required for full background image */
-
 html,
 body,
 header,
@@ -34,37 +33,3 @@ font-family: 'Itim', cursive;
     background: linear-gradient(to right, rgb(235,235,235, 0.4), rgb(29,29,29, 0.4));
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-
-
-/*
-// font-family: 'Archivo Narrow', sans-serif;
-// font-family: 'Atma', cursive;
-// font-family: 'Cabin Sketch', cursive;
-// font-family: 'Caveat Brush', cursive;
-// font-family: 'Chewy', cursive;
-// font-family: 'Dancing Script', cursive;
-// font-family: 'Finger Paint', cursive;
-// font-family: 'Fjalla One', sans-serif;
-// font-family: 'Fredericka the Great', cursive;
-// font-family: 'Homemade Apple', cursive;
-// font-family: 'Loved by the King', cursive;
-// font-family: 'Nanum Brush Script', cursive;
-// font-family: 'Nanum Pen Script', cursive;
-// font-family: 'Nothing You Could Do', cursive;
-// font-family: 'Open Sans Condensed', sans-serif;
-// font-family: 'Over the Rainbow', cursive;
-// font-family: 'PT Sans Narrow', sans-serif;
-// font-family: 'Permanent Marker', cursive;
-// font-family: 'Pragati Narrow', sans-serif;
-// font-family: 'Roboto', sans-serif;
-// font-family: 'Satisfy', cursive;
-// font-family: 'Sedgwick Ave', cursive;
-// font-family: 'Source Sans Pro', sans-serif;
-// font-family: 'Oswald', sans-serif;
-// font-family: 'Overpass', sans-serif;
-// font-family: 'PT Sans', sans-serif;
-// font-family: 'Nanum Gothic', sans-serif;
-// font-family: 'Hind', sans-serif;
-// font-family: 'Coming Soon', cursive;
-// font-family: 'Itim', cursive;
-// font-family: 'Love Ya Like A Sister', cursive;*/

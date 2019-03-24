@@ -131,10 +131,12 @@ $(document).ready(function() {
     $("#movie-yes").click(function() {
         $("#youtube").show();
 
-        let formData = {'q': $('#movie-name').html()};
+        let formData = {'q': $('#moviename').val()};
+        console.log(formData)
 
         $.get('/get_youtube_video', formData, (results) => {
-        $('#youtube-link').attr('href', "https://www.youtube.com/watch?v="+results);
+            console.log(results)
+        $('.embed-responsive-item').attr('src', "https://www.youtube.com/embed/"+results);
         });
     });
 

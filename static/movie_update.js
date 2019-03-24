@@ -18,7 +18,7 @@ $(document).ready(function() {
         console.log(formData)
         
         $.get('/get_youtube_video', formData, (results) => {
-        $('#youtube-link').attr('src', "https://www.youtube.com/embed/"+results);
+        $('.embed-responsive-item').attr('src', "https://www.youtube.com/embed/"+results);
         });
         });
 

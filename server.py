@@ -1,5 +1,4 @@
 """Recipe and Movie Rec website"""
-from pprint import pformat
 import os
 import requests
 from random import randint, choice
@@ -7,6 +6,7 @@ from jinja2 import StrictUndefined
 from flask import Flask, render_template, request, flash, redirect, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from model import connect_to_db, db, User, Recipe, Movie, Activity
+from api import get_edamam_payload, request_edamam_api, get_movie_payload, request_movie_api
 from ast import literal_eval
 from datetime import datetime, timedelta
 from passlib.hash import sha256_crypt
@@ -38,72 +38,6 @@ MOVIEDB_URL = "https://api.themoviedb.org/3/"
 """//////////////////////////////////////////////////////////////////////////"""
 #HELPER FUNCTIONS
 """//////////////////////////////////////////////////////////////////////////"""
-
-
-def get_edamam_payload():
-    """Helper function to get payload backbone for edamam API request"""
-
-    dietary = request.args.get("dietary")
-    health = request.args.getlist("health[]")
-
-    integer = randint(0,50)
-
-    payload = {'q': "", 'app_id': EDAMAM_ID, 'app_key': EDAMAM_KEY, 'health': 'alcohol-free',
-                'calories': f'{randint(600,1500)}-{randint(3000,6000)}','from': integer, 'to': integer+99}
-    if dietary:
-        payload.update({'diet': dietary})
-    if health:
-        payload.update({'health': health})   
-
-    return payload
-
-
-def request_edamam_api(payload):
-    """Helper function to make edamam API request and retrieve data"""
-
-    response = requests.get(EDAMAM_URL, params=payload)
-
-    data = response.json()
-    recipe_results = data['hits']
-    recipes =  [ recipe['recipe'] for recipe in recipe_results ]
-    
-    return recipes
-
-
-def get_movie_payload(genres=[], gte='', lte=''):
-    """Helper function to build payload backbone with genre and year info for movies"""
-
-    genre_dict = {'action': 28, 'adventure': 12, 'animation': 16, 
-                'comedy': 35, 'crime': 80, 'documentary': 99,
-                'drama': 18, 'family': 10751, 'fantasy': 14, 
-                'history': 36, 'horror': 27, 'music': 10402,
-                'mystery': 9648, 'romance': 10749, 'science fiction': 878,
-                'thriller': 53, 'war': 10752, 'western': 37}
-    
-    genre = [ str(genre_dict[genre]) for genre in genres ]
-    genre = ','.join(genre)
-
-    payload = {'api_key': MOVIEDB_KEY}
-
-    if genre:
-        payload.update({'with_genres': genre})
-    if gte:
-        payload.update({'release_date.gte': gte})
-    if lte:
-        payload.update({'release_date.lte': lte})
-
-    return payload
-
-
-def request_movie_api(payload):
-    """Helper function to make moviedb API request and retrieve data"""
-
-    response = requests.get(MOVIEDB_URL + "discover/movie", params=payload)
-    data = response.json()
-    movie = choice(data['results'])
-
-    return movie
-
 
 def save_recipe_info(recipe):
     """Helper function to save the recipe selected to database"""
@@ -138,8 +72,6 @@ def save_movie_info(movie):
     session['movie_id'] = movie_id
 
 
-
-
 """//////////////////////////////////////////////////////////////////////////"""
 #ROUTES
 """//////////////////////////////////////////////////////////////////////////"""
@@ -164,7 +96,6 @@ def display_random_recipe_and_movie():
 
     recipe = choice(recipes)
     save_recipe_info(recipe)
-    print(recipe)
     payload = get_movie_payload()
     payload.update({'page': randint(1,50)})
 
@@ -232,7 +163,6 @@ def display_recipe_search_results():
         payload.update({'diet': dietary})
     if health:
         payload.update({'health': health})
-    print(payload)
     recipes = request_edamam_api(payload)
 
     return render_template("random_recipes_search.html", recipes=recipes)
@@ -481,7 +411,7 @@ def register_form():
 
 @app.route('/display_activity_log')
 def display_activity_log():
-    """Show recipe and movie for the date user selects"""
+    """Show past recipes and movies user selected organized by dates"""
 
     user_id = session.get("user_id")
     activities = Activity.query.filter_by(user_id=user_id).all()
@@ -525,87 +455,4 @@ if __name__ == "__main__":
     # DebugToolbarExtension(app)
 
     app.run(host="0.0.0.0")
-
-
-#   <div class="row">
-
-#   {% for recipe_row in recipes | batch(4, '&nbsp;') %}
-
-#         {% for recipe in recipe_row %}
-#     {% set recipe_url = recipe['url'] %}
-#     {% set recipe_image = recipe['image'] %}
-#     {% set recipe_name = recipe['label'] %}
-#     {% set recipe_id = recipe['uri'][-32:] %}
-
-#     <form action="/save_recipe">
-#   <div class="span3 col-xs-">
-#     <a href="{{ recipe['url'] }}" target="_blank"><img src="{{ recipe['image'] }}"></a><br> <p style="font-size:14px; text-align:center">{{ recipe['label'] }}</p>
-#   </div>
-
-#           <input type="submit" value="Chewse This and Show Me Movies to Watch">
-#           <input type="hidden" name="recipe" value="{{ recipe_url, recipe_image, recipe_name, recipe_id }}"></input>
-#     </form>
-
-#     {% endfor %}
-
-# {% endfor %}
-# </div>
-
-
-
-
-
-
-
-
-
-# <br>
-# <br>
-# <div class="row">
-
-# {% for date, recipe, movie in activity_info %}
-
-# <h4 style="font-family: 'Cabin Sketch', cursive;">{{ date }}</h4>
-# <div class="card card-cascade wider reverse col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 m-1 p-1">
-
-#   <!-- Card image -->
-#   <div class="view view-cascade overlay">
-#     <img class="card-img-top" src="{{ recipe.recipe_image }}">
-#     <a href="{{ recipe.recipe_url }}" target="_blank">
-#       <div class="mask flex-center rgba-white-light"><p class="white-text" style="font-size:20px;">INSTRUCTIONS</p></div>
-#     </a>
-#   </div>
-#   <!-- Card content -->
-#   <div class="card-body card-body-cascade text-center">
-
-#     <!-- Title -->
-#     <h4 class="card-title" style="font-size:20px; font-family: 'Cabin Sketch', cursive;">{{ recipe.recipe_name }}</h4>
-#     </p>
-# </div>
-
-#   </div>
-#   <div class="card card-cascade wider reverse col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 m-1 p-1">
-
-#   <!-- Card image -->
-#   <div class="view view-cascade overlay">
-#     <img class="card-img-top" src="{{ movie.movie_image }}">
-#     <a href="{{ movie.movie_url }}" target="_blank">
-#       <div class="mask flex-center rgba-white-light"><p class="white-text" style="font-size:20px;">INFORMATION</p></div>
-#     </a>
-#   </div>
-
-#   <!-- Card content -->
-#   <div class="card-body card-body-cascade text-center">
-
-#     <!-- Title -->
-#     <h4 class="card-title" style="font-size:20px; font-family: 'Cabin Sketch', cursive;">{{ movie.movie_name }}</h4>
-#     </p>
-
-#   </div>
-
-# </div>
-
-
-# {% endfor %}
-# </div>
 

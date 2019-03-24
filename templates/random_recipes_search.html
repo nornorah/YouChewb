@@ -6,13 +6,13 @@
 <br>
 
 <form action="/display_recipe_search_results" class="form-inline md-form form-sm">
-  <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search by recipe name or by ingredients... Try 'chicken parmesan' or 'onions, shrimp' (ingredients must be separated by commas)" name="search" style="color: white">
-    <button type="submit" style="background: none;padding: 0px;border: none;"><i class="fas fa-search" aria-hidden="true" style="color:white"></i></button>
+  <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search by recipe name or by ingredients (ingredients must be separated by commas)" name="search" style="color: #683200; font-size:25px">
+    <button type="submit" style="background: none;padding: 0px;border: none;"><i class="fas fa-search" aria-hidden="true" style="color:#683200"></i></button>
 </form>
 
 <form action="/display_movie_rec_by_filters"> 
 <div class="btn-group">
-  <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius:50px; color:#2f4951; font-family: 'Itim', cursive;">Calories</button>
+  <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius:50px; color:#683200; font-family: 'Cabin Sketch', cursive; font-size:25px">Calories</button>
   <div class="dropdown-menu dropdown-menu-right" name="calories">
     <button class="dropdown-item" type="button" value="500">0-500 Calories</button>
     <button class="dropdown-item" type="button" value="1000">501-1000 Calories</button>
@@ -23,7 +23,7 @@
   </div>
 <div class="btn-group">
 
-  <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius:50px; color:#2f4951; font-family: 'Itim', cursive;">Dietary Preference</button>
+  <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius:50px; color:#683200; font-family: 'Cabin Sketch', cursive; font-size:25px">Dietary Preference</button>
   
   <div class="dropdown-menu dropdown-menu-right" name="dietary">
     <button class="dropdown-item" type="button" value="balanced">Balanced</button>
@@ -33,7 +33,7 @@
     </div>
 <div class="btn-group">
 
-  <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius:50px; color:#2f4951; font-family: 'Itim', cursive;">Dietary Restrictions </button>
+  <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius:50px; color:#683200; font-family: 'Cabin Sketch', cursive; font-size:25px">Dietary Restrictions </button>
 <div class="dropdown-menu dropdown-menu-right" name="health">
   <button class="dropdown-item" type="button" value="peanut-free">Peanut-Free</button>
     <button class="dropdown-item" type="button" value="vegetarian">Vegetarian</button>
@@ -51,7 +51,7 @@
   {% set recipe_id = recipe['uri'][-32:] %}
 
 <!-- Card -->
-<div class="card card-cascade wider reverse col-xl-3 col-lg-3 col-md-4 col-sm-6 col-xs-6 m-1 p-1">
+<div class="card card-cascade wider reverse col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6 m-1 p-1" style="background-image: url('https://images.unsplash.com/photo-1516541196182-6bdb0516ed27?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80')">
 
   <!-- Card image -->
   <div class="view view-cascade overlay">
@@ -66,15 +66,15 @@
   <div class="card-body card-body-cascade text-center">
 
     <!-- Title -->
-    <h4 class="card-title" style="font-size:20px; font-family: 'Cabin Sketch', cursive;">{{ recipe_name }}</h4>
+    <h4 class="card-title" style="font-size:20px; font-family: 'Cabin Sketch', cursive; font-size:30px">{{ recipe_name }}</h4>
     <!-- Subtitle -->
-    <h6 class="font-weight-bold py-1" style="color: #399B80">you'll need...</h6>
+    <h6 class="font-weight-bold py-1" style="color: #399B80; font-size: 25px">you'll need...</h6>
     <!-- Text -->
-    <p class="card-text">{{ recipe_ing }}</p>
+    <p class="card-text" style="font-size:25px">{{ recipe_ing }}</p>
   </div>
 <div class="card-tail text-center m-1 p-1">
         <form action="/save_recipe">
-          <button type="button" class="btn btn-outline-default waves-effect text-center" style="border-radius:20px; font-family: 'Cabin Sketch', cursive;">chewse this recipe</button>
+          <button type="button" class="btn btn-outline-default waves-effect text-center" style="border-radius:20px; font-family: 'Cabin Sketch', cursive; font-size:20px">chewse this recipe</button>
           <input type="hidden" name="recipe" value="{{ recipe_url, recipe_image, recipe_name, recipe_id }}"></input>
         </form>
       </div>

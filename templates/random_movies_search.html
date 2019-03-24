@@ -5,93 +5,46 @@
 <br>
 <br>
 
-  <button type="button" class="btn btn-light waves-effect text-center" style="border-radius:50px; font-family: 'Itim', cursive;" id="movie-title-search">recommendation by movie title</button>
+  <button type="button" class="btn btn-light waves-effect text-center" style="color:#683200; font-size: 20px; border-radius:50px; font-family: 'Cabin Sketch', cursive;" id="movie-title-search">recommendation by movie title</button>
 
-  <button type="button" class="btn btn-light waves-effect text-center" style="border-radius:50px; font-family: 'Itim', cursive;" id="movie-filter-search">recommendation by filters</button>
-</button>
+  <button type="button" class="btn btn-light waves-effect text-center" style="color:#683200; font-size: 20px; border-radius:50px; font-family: 'Cabin Sketch', cursive;" id="movie-filter-search">recommendation by filters</button>
 
 
-<div id="movie-title" style="display:none" style="color: #757575">
+<div id="movie-title" style="display:none">
   <form action="/display_movie_rec_by_search" class="form-inline md-form form-sm">
-  <input class="form-control form-control-sm mr-3 w-40" type="text" placeholder="Type a movie title..." name="search" style="z-index: 9999; margin-left:5%; color: white">
- <button type="submit" style="background: none; padding: 0px; border: none;"><i class="fas fa-search" aria-hidden="true" style="color:white"></i></button></input>
+  <input class="form-control form-control-sm mr-3 w-40" type="text" placeholder="Type a movie title..." name="search" style="z-index: 9999; margin-left:5%; color: #683200; font-size: 30px; font-color: #683200">
+ <button type="submit" style="background: none; padding: 0px; border: none;"><i class="fas fa-search" aria-hidden="true" style="color:#683200"></i></button></input>
   </form>
 </div>
 <form action="/display_movie_rec_by_filters">
 <div id="movie-filter" style="display:none; margin-left:5%">
-<!--     <button type="button" class="btn btn-rounded waves-effect text-center" style="border-radius:50px; color:#757575; font-family: 'Itim', cursive;">Genre</button> -->
-<p style="font-family: 'Cabin Sketch', cursive; color: white">GENRE:</p>
+<p style="font-family: 'Cabin Sketch', cursive; color: #683200; font-size: 28px">GENRE:</p>
 
-    <input type="checkbox" name="genre" value="action" id="checkbox"> <label for="checkbox" style="color:white">Action</label></input>
-    <input type="checkbox" name="genre" value="adventure"> <label for="checkbox" style="color:white">Adventure</label></input>
-    <input type="checkbox" name="genre" value="animation"> <label for="checkbox" style="color:white">Animation</label></input>
-    <input type="checkbox" name="genre" value="comedy"> <label for="checkbox" style="color:white">Comedy</label></input>
+    <input type="checkbox" name="genre" value="action" id="checkbox"> <label for="checkbox" style="color:#683200">Action</label></input>
+    <input type="checkbox" name="genre" value="adventure"> <label for="checkbox" style="color:#683200">Adventure</label></input>
+    <input type="checkbox" name="genre" value="animation"> <label for="checkbox" style="color:#683200">Animation</label></input>
+    <input type="checkbox" name="genre" value="comedy"> <label for="checkbox" style="color:#683200">Comedy</label></input>
     <br>
-    <input type="checkbox" name="genre" value="crime"> <label for="checkbox" style="color:white">Crime</label></input>
-    <input type="checkbox" name="genre" value="documentary"> <label for="checkbox" style="color:white">Documentary</label></input>
-    <input type="checkbox" name="genre" value="drama"> <label for="checkbox" style="color:white">Drama</label></input>
-    <input type="checkbox" name="genre" value="family"> <label for="checkbox" style="color:white">Family</label></input>
+    <input type="checkbox" name="genre" value="crime"> <label for="checkbox" style="color:#683200">Crime</label></input>
+    <input type="checkbox" name="genre" value="documentary"> <label for="checkbox" style="color:#683200">Documentary</label></input>
+    <input type="checkbox" name="genre" value="drama"> <label for="checkbox" style="color:#683200">Drama</label></input>
+    <input type="checkbox" name="genre" value="family"> <label for="checkbox" style="color:#683200">Family</label></input>
     <br>
-    <input type="checkbox" name="genre" value="fantasy"> <label for="checkbox" style="color:white">Fantasy</label></input>
-    <input type="checkbox" name="genre" value="history"> <label for="checkbox" style="color:white">History</label></input>
-    <input type="checkbox" name="genre" value="horror"> <label for="checkbox" style="color:white">Horror</label></input>
-    <input type="checkbox" name="genre" value="mystery"> <label for="checkbox" style="color:white">Mystery</label></input>
+    <input type="checkbox" name="genre" value="fantasy"> <label for="checkbox" style="color:#683200">Fantasy</label></input>
+    <input type="checkbox" name="genre" value="history"> <label for="checkbox" style="color:#683200">History</label></input>
+    <input type="checkbox" name="genre" value="horror"> <label for="checkbox" style="color:#683200">Horror</label></input>
+    <input type="checkbox" name="genre" value="mystery"> <label for="checkbox" style="color:#683200">Mystery</label></input>
     <br>
-    <input type="checkbox" name="genre" value="romance"> <label for="checkbox" style="color:white">Romance</label></input>
-    <input type="checkbox" name="genre" value="science-fiction"> <label for="checkbox" style="color:white">Science Fiction</label></input>
-    <input type="checkbox" name="genre" value="thriller"> <label for="checkbox" style="color:white">Thriller</label></input>
-    <input type="checkbox" name="genre" value="war"> <label for="checkbox" style="color:white">War</label></input>
+    <input type="checkbox" name="genre" value="romance"> <label for="checkbox" style="color:#683200">Romance</label></input>
+    <input type="checkbox" name="genre" value="science-fiction"> <label for="checkbox" style="color:#683200">Science Fiction</label></input>
+    <input type="checkbox" name="genre" value="thriller"> <label for="checkbox" style="color:#683200">Thriller</label></input>
+    <input type="checkbox" name="genre" value="war"> <label for="checkbox" style="color:#683200">War</label></input>
     <br>
-
-<!--     <div class="custom-control custom-checkbox custom-control-inline">
-      <input type="checkbox" class="custom-control-input" value="action" name="genre" id="defaultInline1">
-      <label class="custom-control-label" for="defaultInline1">Action</label>
-      <input type="checkbox" class="custom-control-input" value="adventure" name="genre" id="defaultInline2">      
-      <label class="custom-control-label" for="defaultInline2">Adventure</label>
-      <input type="checkbox" class="custom-control-input" value="animation" name="genre" id="defaultInline3">
-      <label class="custom-control-label" for="defaultInline3">Animation</label>      
-      <input type="checkbox" class="custom-control-input" value="comedy" name="genre" id="defaultInline4">
-      <label class="custom-control-label" for="defaultInline4">Comedy</label>
-    </div>
-   <br>
-    <div class="custom-control custom-checkbox custom-control-inline">
-      <input type="checkbox" class="custom-control-input" value="crime" name="genre" id="defaultInline5">
-      <label class="custom-control-label" for="defaultInline5">Crime</input></label>
-      <input type="checkbox" class="custom-control-input" value="documentary" name="genre" id="defaultInline6">      
-      <label class="custom-control-label" for="defaultInline6">Documentary</input></label>
-      <input type="checkbox" class="custom-control-input" value="drama" name="genre" id="defaultInline7">
-      <label class="custom-control-label" for="defaultInline7">Drama</input></label>      
-      <input type="checkbox" class="custom-control-input" value="family" name="genre" id="defaultInline8">
-      <label class="custom-control-label" for="defaultInline8">Family</input></label>
-  </div>
-  <br>
-    <div class="custom-control custom-checkbox custom-control-inline">
-      <input type="checkbox" class="custom-control-input" value="fantasy" name="genre" id="defaultInline9">
-      <label class="custom-control-label" for="defaultInline9">Fantasy</input></label>
-      <input type="checkbox" class="custom-control-input" value="war" name="genre" id="defaultInline10">      
-      <label class="custom-control-label" for="defaultInline10">War</input></label>
-      <input type="checkbox" class="custom-control-input" value="horror" name="genre" id="defaultInline11">
-      <label class="custom-control-label" for="defaultInline11">Horror</input></label>      
-      <input type="checkbox" class="custom-control-input" value="mystery" name="genre" id="defaultInline12">
-      <label class="custom-control-label" for="defaultInline12">Mystery</input></label>
-  </div>
-  <br>
-      <div class="custom-control custom-checkbox custom-control-inline">
-      <input type="checkbox" class="custom-control-input" value="romance" name="genre" id="defaultInline13">
-      <label class="custom-control-label" for="defaultInline13">Romance</input></label>
-      <input type="checkbox" class="custom-control-input" value="science-fiction" name="genre" id="defaultInline14">      
-      <label class="custom-control-label" for="defaultInline14">Science Fiction</input></label>
-      <input type="checkbox" class="custom-control-input" value="thriller" name="genre" id="defaultInline15">
-      <label class="custom-control-label" for="defaultInline15">Thriller</input></label>      
-      <input type="checkbox" class="custom-control-input" value="history" name="genre" id="defaultInline16">
-      <label class="custom-control-label" for="defaultInline16">History</input></label>
-  </div> -->
-  <br>
-  <p style="font-family: 'Cabin Sketch', cursive; color:white">YEAR RELEASED:</p>
+  <p style="font-family: 'Cabin Sketch', cursive; color:#683200; font-size:28px">YEAR RELEASED:</p>
         <input type="text" id="gte" placeholder="Released after" class="year" name="gte">
         <input type="text" id="lte" placeholder="Released before" class="year" name="lte">        
         <br>
-        <input type="submit" id="movie-search"></input>
+        <input type="submit" id="movie-search" placeholder="SEARCH" style="font-family: 'Cabin Sketch', cursive;"></input>
 </div>
 </form>
 
@@ -110,7 +63,7 @@
 {% set movie_overview = movie['overview'] %}
 
 <!-- Card -->
-<div class="card card-cascade wider reverse col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 p-1 m-1" style="background-color:rgb(222,228,236); padding:0; margin:0">
+<div class="card card-cascade wider reverse col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6 m-1 p-1" style="background-image: url('https://images.unsplash.com/photo-1516541196182-6bdb0516ed27?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80');">
 
   <!-- Card image -->
   <div class="view view-cascade overlay">
@@ -124,55 +77,65 @@
   <div class="card-body card-body-cascade text-center">
 
     <!-- Title -->
-          <h4 class="card-title" style="font-size:20px; font-family: 'Cabin Sketch', cursive;">{{ movie_name }}</h4>
+          <h4 class="card-title" style="font-size:28px; font-family: 'Cabin Sketch', cursive;">{{ movie_name }}</h4>
 
     <!-- Subtitle -->
-    <h6 class="font-weight-bold py-2" style="color: #399B80">synopsis</h6>
+    <h6 class="font-weight-bold py-2" style="color: #399B80; font-size:25px">synopsis</h6>
     <!-- Text -->
-    <p class="card-text">{{ movie_overview }}
+    <p class="card-text" style="font-size:20px">{{ movie_overview }}
     </p>
 
 
   </div>
 
-      <div class="card-tail text-center m-1 p-1">
+      <div class="card-tail text-center">
 
         <form action="/save_activity">
-          <button type="button" class="btn btn-outline-dark waves-effect text-center" id="choose-movie" style="border-radius:20px; font-family: 'Cabin Sketch', cursive;">chewse this movie</button>
+        <button type="button" class="btn btn-outline-default waves-effect text-center" style="border-radius:20px; font-family: 'Cabin Sketch', cursive; font-size:20px" id="choose-movie" data-toggle="tooltip" data-placement="top" title="Click to get YouTube link">chewse this movie</button>
           <input type="hidden" name="movie" value="{{ movie_url, movie_image, movie_name, movie_id }}"></input>
           <input type="hidden" name="movie" value="{{ movie_name }}" id="movie-name">
         </form>
-          <button type="button" class="btn btn-rounded waves-effect" style="color: red; border-radius:500px; display:none" data-toggle="modal" data-target="#exampleModal" id="youtube">
-            <i class="fab fa-youtube"></i>
+
+          <button type="button" class="btn btn-danger btn-circle" style="width: 60px; height: 60px; line-height: 15px; padding:0; border-radius:50%; display:none" data-toggle="modal" data-target="#exampleModal" id="youtube">            
+            <i class="fab fa-youtube" style="font-size:30px"></i>
           </button>
           <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">{{ movie_name }}</h5>
+
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true" style="font-size:30px">&times;</span>
         </button>
+      </div>
       <div class="modal-body">
         <div class="embed-responsive embed-responsive-4by3">
         <iframe class="embed-responsive-item" src="" allowfullscreen id="youtube-link"></iframe>
         </div>
-
       </div>
       </div>
       </div>
       </div>
     </div>
+
      </div>
-</div>
 
 <!-- Card -->
 {% endfor %}
 </div>
 
-<!-- #background color
- -->
+
+<script>
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});
+</script>
+
+
+
+
  <script src="/static/movie_update.js"></script>
 
 {% endblock %}

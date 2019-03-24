@@ -4,8 +4,8 @@
 <br>
 <br>
 <br>
-<h4 style="font-family: 'Finger Paint', cursive; text-align:left; color:rgb(222,228,236)" id="start" >let's start with the recipe...</h4>
-<h4 style="font-family: 'Finger Paint', cursive; text-align:right; display:none; color:rgb(222,228,236)" id="movie-text" >and now for the movie...</h4>
+<h4 style="font-family: 'Finger Paint', cursive; text-align:left; color:#683200; font-size: 30px;" id="start" >let's start with the recipe...</h4>
+<h4 style="font-family: 'Finger Paint', cursive; text-align:right; display:none; color:#683200; font-size: 30px;" id="movie-text" >and now for the movie...</h4>
 
 <div class="row">
   {% set recipe_url = recipe['url'] %}
@@ -13,25 +13,27 @@
   {% set recipe_name = recipe['label'].split(':')[-1] %}
   {% set recipe_ing = ('; '.join(recipe['ingredientLines'])) %}
   {% set recipe_id = recipe['uri'][-32:] %}
+
 <!-- Jumbotron -->
-<div class="jumbotron text-center col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12" style="background-color: rgb(222,228,236); border-radius: 20px">
+<div class="jumbotron text-center col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12" style="background-image: url('https://images.unsplash.com/photo-1516541196182-6bdb0516ed27?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'); border-radius: 20px">
 
   <!-- Title -->
-  <h4 class="card-title h4 pb-2" id="recipe-name" style="font-family: 'Cabin Sketch', cursive;"><strong>{{ recipe_name }}</strong></h4>
+  <h4 class="card-title h4 pb-2" id="recipe-name" style="font-family: 'Cabin Sketch', cursive; font-size: 30px;"><strong>{{ recipe_name }}</strong></h4>
 
   <!-- Card image -->
   <div class="view overlay my-4 text-center">
     <img src="{{ recipe_image }}" class="img-fluid mx-auto d-block" id="recipe-img" style="width:400px; height:450px">
     <a href="{{ recipe_url }}" id="recipe-url">
-      <div class="mask rgba-white-slight"></div>
+            <div class="mask flex-center rgba-white-light"><p class="white-text" style="font-size:20px;">CLICK FOR INSTRUCTIONS</p></div>
+
     </a>
   </div>
 
 
-  <p class="card-text" id="recipe-ingredients"><h5 style="color:#399B80">you'll need...</h5> {{ recipe_ing }}</p>
+  <h5 style="color:#399B80;font-size: 25px;">you'll need...</h5><p class="card-text" id="recipe-ingredients" style="font-size: 25px">{{ recipe_ing }}</p>
 
 <div class="btn-group" id="dietary" style="display:none">
-  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius:20px; color:#757575; font-family: 'Itim', cursive;">Dietary Preference?</button>
+  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border-radius:50px; color:#757575; font-family: 'Itim', cursive; font-size: 20px">Dietary Preference?</button>
   <div class="dropdown-menu dropdown-menu-right" name="dietary">
     <button class="dropdown-item" type="button" value="balanced">Balanced</button>
     <button class="dropdown-item" type="button" value="low-fat">Low-Fat</button>
@@ -39,32 +41,15 @@
     <button class="dropdown-item" type="button" value="">No Preference</button>
   </div>
 </div>
-<!-- <div class="custom-control custom-radio custom-control-inline">
-  <input type="radio" class="custom-control-input" id="bal" value="balanced">
-  <label class="custom-control-label" for="bal">Balanced</label>
-</div>
-<div class="custom-control custom-radio custom-control-inline">
-  <input type="radio" class="custom-control-input" id="lowfat" value="low-fat">
-  <label class="custom-control-label" for="lowfat">Low-Fat</label>
-</div>
-<div class="custom-control custom-radio custom-control-inline">
-  <input type="radio" class="custom-control-input" id="low-carbs" value="low-carbs">
-  <label class="custom-control-label" for="low-carbs">Low-Carbs</label>
-</div>
-<div class="custom-control custom-radio custom-control-inline">
-  <input type="radio" class="custom-control-input" id="no-pref" value="">
-  <label class="custom-control-label" for="no-pref">No Preference</label>
-</div> -->
 
 
-
-
-      <div id="peanut" style="display:none">
-  <button class="btn btn-rounded" style="color:#757575; border-radius:50px; font-family: 'Itim', cursive;">Peanut Allergies?</button>
+  <div id="peanut" style="display:none">
+  <button class="btn btn-rounded" style="color:#757575; border-radius:50px; font-family: 'Itim', cursive; font-size: 20px">Peanut Allergies?</button>
 <div class="custom-control custom-radio custom-control-inline" id="peanut">
   <input type="radio" class="custom-control-input" id="peanut-yes" value="peanut-free">
   <label class="custom-control-label" for="peanut-yes">YES</label>
-</div>
+  </div>
+
 
 <div class="custom-control custom-radio custom-control-inline">
   <input type="radio" class="custom-control-input" id="peanut-no" value="">
@@ -72,25 +57,26 @@
 </div>
       </div>  
 
-      <div id="vege" style="display:none">
-  <button class="btn btn-rounded" style="color:#757575; border-radius:50px; font-family: 'Itim', cursive;">Vegetarian?</button>
+
+  <div id="vege" style="display:none">
+  <button class="btn btn-rounded" style="color:#757575; border-radius:50px; font-family: 'Itim', cursive; font-size: 20px">Vegetarian?</button>
 <div class="custom-control custom-radio custom-control-inline" id="vege">
   <input type="radio" class="custom-control-input" id="health1" value="vegetarian">
   <label class="custom-control-label" for="health1">YES</label>
-</div>
-
-<div class="custom-control custom-radio custom-control-inline">
+  </div>
+    <div class="custom-control custom-radio custom-control-inline">
   <input type="radio" class="custom-control-input" id="health2" value="">
   <label class="custom-control-label" for="health2">NO</label>
-</div>
-      </div>      
-      
+  </div>
+  </div>      
+   
+
 <form action="/save_recipe">
-    <button type="button" class="btn btn-outline-default waves-effect text-center" id="recipe-yes" style="border-radius:20px; font-family: 'Cabin Sketch', cursive;">chewse this recipe</button>
+    <button type="button" class="btn btn-outline-default waves-effect text-center" id="recipe-yes" style="border-radius:20px; font-family: 'Cabin Sketch', cursive; font-size: 25px" data-toggle="tooltip" data-placement="top" title="Click to see movie suggestion">chewse this recipe</button>
     <input type="hidden" name="recipe" value="{{ recipe_url, recipe_image, recipe_name, recipe_id }}">
 </form>
-            <button type="button" class="btn btn-outline-default waves-effect text-center" id="new-random-recipe" style="border-radius:20px; font-family: 'Cabin Sketch', cursive; display:none;">get a new recipe</button>
-            <button type="button" class="btn btn-outline-default waves-effect text-center" id="recipe-no" style="border-radius:20px; font-family: 'Cabin Sketch', cursive;">filter more</button>
+            <button type="button" class="btn btn-outline-default waves-effect text-center" id="new-random-recipe" style="border-radius:20px; font-family: 'Cabin Sketch', cursive; display:none; font-size: 25px">get a new recipe</button>
+            <button type="button" class="btn btn-outline-default waves-effect text-center" id="recipe-no" style="border-radius:20px; font-family: 'Cabin Sketch', cursive; font-size: 25px">filter more</button>
 </div>
 
 
@@ -106,7 +92,7 @@
 
 <!-- Jumbotron -->
 
-<div class="jumbotron text-center col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12" id="movie" style="display:none; background-color: rgb(222,228,236); border-radius:20px">
+<div class="jumbotron text-center col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12" id="movie" style="display:none; background-image: url('https://images.unsplash.com/photo-1516541196182-6bdb0516ed27?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'); border-radius:20px">
 
   <!-- Title -->
   <h4 class="card-title h4 pb-2" id="movie-name" style="font-family: 'Cabin Sketch', cursive;"><strong>{{ movie_name }}</strong></h4>
@@ -115,60 +101,89 @@
   <div class="view overlay my-4 text-center">
     <img src="{{ movie_image }}" class="img-fluid mx-auto d-block" id="movie-img" style="width:400px; height:450px">
     <a href="{{ movie_url }}" id="movie-url">
-      <div class="mask rgba-white-slight"></div>
+      <div class="mask flex-center rgba-white-light"><p class="white-text" style="font-size:20px;">CLICK FOR MOVIE INFO</p></div>
+
     </a>
   </div>
 
 
-  <h5 style="color:#399B80"> synopsis </h5><p class="card-text" id="movie-overview">{{ movie_overview }}</p>
+  <h5 style="color:#399B80; font-size:25px"> synopsis </h5><p class="card-text" id="movie-overview" style="font-size:25px">{{ movie_overview }}</p>
 
       <div id="genre-checkbox" style="display:none">
- <button class="btn btn-rounded" style="color:#757575; border-radius:50px; font-family: 'Itim', cursive;">Genre</button>    
+ <button class="btn btn-rounded" style="color:#757575; border-radius:50px; font-family: 'Itim', cursive; font-size: 20px">Genre</button>    
 <br>
-      <input type="checkbox" class="genre" value="action">Action</input>
-      <input type="checkbox" class="genre" value="adventure">Adventure</input>
-      <input type="checkbox" class="genre" value="animation">Animation</input>
-      <input type="checkbox" class="genre" value="comedy">Comedy</input>
+      <input type="checkbox" class="genre" value="action"> Action</input>
+      <input type="checkbox" class="genre" value="adventure"> Adventure</input>
+      <input type="checkbox" class="genre" value="animation"> Animation</input>
+      <input type="checkbox" class="genre" value="comedy"> Comedy</input>
       <br>
-      <input type="checkbox" class="genre" value="crime">Crime</input>
-      <input type="checkbox" class="genre" value="documentary">Documentary</input>
-      <input type="checkbox" class="genre" value="drama">Drama</input>
-      <input type="checkbox" class="genre" value="family">Family</input>
+      <input type="checkbox" class="genre" value="crime"> Crime</input>
+      <input type="checkbox" class="genre" value="documentary"> Documentary</input>
+      <input type="checkbox" class="genre" value="drama"> Drama</input>
+      <input type="checkbox" class="genre" value="family"> Family</input>
       <br>
-      <input type="checkbox" class="genre" value="fantasy">Fantasy</input>
-      <input type="checkbox" class="genre" value="war">War</input>
-      <input type="checkbox" class="genre" value="horror">Horror</input>
-      <input type="checkbox" class="genre" value="mystery">Mystery</input>
+      <input type="checkbox" class="genre" value="fantasy"> Fantasy</input>
+      <input type="checkbox" class="genre" value="war"> War</input>
+      <input type="checkbox" class="genre" value="horror"> Horror</input>
+      <input type="checkbox" class="genre" value="mystery"> Mystery</input>
       <br>
-      <input type="checkbox" class="genre" value="romance">Romance</input>
-      <input type="checkbox" class="genre" value="science fiction">Sci-Fi</input>
-      <input type="checkbox" class="genre" value="thriller">Thriller</input>      
-      <input type="checkbox" class="genre" value="history">History</input>  
+      <input type="checkbox" class="genre" value="romance"> Romance</input>
+      <input type="checkbox" class="genre" value="science-fiction"> Sci-Fi</input>
+      <input type="checkbox" class="genre" value="thriller"> Thriller</input>      
+      <input type="checkbox" class="genre" value="history"> History</input>  
       <br>
     </div>
     <br>
 
 
     <div id="year-radio" style="display:none">
- <button class="btn btn-rounded" style="color:#757575; border-radius:50px; font-family: 'Itim', cursive;">Year Released</button>        
+ <button class="btn btn-rounded" style="color:#757575; border-radius:50px; font-family: 'Itim', cursive; font-size: 20px">Year Released</button>        
  <br>
         <input type="text" id="gte" placeholder="Released after" class="year">
         <input type="text" id="lte" placeholder="Released before" class="year">
         <input type="radio" class="year" value="" name="year">No Preference</input>
     </div>
 
-          <button type="button" class="btn btn-outline-default waves-effect text-center" id="movie-yes" style="border-radius:20px; font-family: 'Cabin Sketch', cursive;">chewse this movie</button>
-            <button type="button" class="btn btn-outline-default waves-effect text-center" id="new-random-movie" style="border-radius:20px; font-family: 'Cabin Sketch', cursive; display:none;">get a new movie</button>
-            <button type="button" class="btn btn-outline-default waves-effect text-center" id="movie-no" style="border-radius:20px; font-family: 'Cabin Sketch', cursive;">filter more</button>
+          <button type="button" class="btn btn-outline-default waves-effect text-center" id="movie-yes" style="border-radius:20px; font-family: 'Cabin Sketch', cursive; font-size: 25px" data-toggle="tooltip" data-placement="top" title="Click to get YouTube link">chewse this movie</button>
+            <button type="button" class="btn btn-outline-default waves-effect text-center" id="new-random-movie" style="border-radius:20px; font-family: 'Cabin Sketch', cursive; display:none; font-size: 25px">get a new movie</button>
+            <button type="button" class="btn btn-outline-default waves-effect text-center" id="movie-no" style="border-radius:20px; font-family: 'Cabin Sketch', cursive; font-size: 25px">filter more</button>
+            <input type="hidden" name="movie" value="{{ movie_name }}" id="moviename">
 
 
-  <form action="/save_activity">
-    <a href="" target="_blank"><button type="button" class="btn btn-rounded waves-effect" style="border-radius:50px; display:none;" id="youtube-link"></button></a>
-  </form>
+<br>
+          <button type="button" class="btn btn-danger btn-circle" style="width: 60px; height: 60px; line-height: 15px; padding:0; border-radius:50%; display:none" data-toggle="modal" data-target="#exampleModal" id="youtube">            
+            <i class="fab fa-youtube" style="font-size:30px"></i>
+          </button>
+          <!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ movie_name }}</h5>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true" style="font-size:30px">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="embed-responsive embed-responsive-4by3">
+        <iframe class="embed-responsive-item" src="" allowfullscreen id="youtube-link"></iframe>
+        </div>
+
+      </div>
+      </div>
+      </div>
+      </div>
+    </div>
 </div jumbotron>
 
 <!-- Jumbotron -->
 </div>
-<script src="/static/recipe_update.js"></script>
 
+<script>
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+<script src="/static/recipe_update.js"></script>
 {% endblock %}
