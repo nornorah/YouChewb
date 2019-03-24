@@ -1,3 +1,20 @@
+from flask import request
+from random import randint, choice
+import os
+import requests
+
+
+EDAMAM_KEY = os.environ.get('EDAMAM_KEY')
+EDAMAM_ID = os.environ.get('EDAMAM_ID')
+
+MOVIEDB_KEY = os.environ.get('MOVIEDB_KEY')
+
+YOUTUBE_KEY = os.environ.get('YOUTUBE_KEY')
+
+EDAMAM_URL = "https://api.edamam.com/search"
+MOVIEDB_URL = "https://api.themoviedb.org/3/" 
+
+
 """++++++++++++++++++++++++++API helper functions++++++++++++++++++++++++++++"""
 
 def get_edamam_payload():
