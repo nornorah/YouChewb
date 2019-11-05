@@ -5,7 +5,7 @@
 
 ## Table of Contents
 * [Motivation](#motivation)
-* [Features](#features)
+* [Highlighted Features](#highlighted-features)
 * [Built With](#built-with)
 * [Setup](#setup)
 * [Code Examples](#code-examples)
@@ -15,7 +15,7 @@
 ## Motivation
 This web application was built with all the homebodies in mind - to entertain and inspire those who may be having trouble deciding what to eat and what to watch. It aims to save them the time to scroll through options and search different websites for suggestions and information. One website for both dinner and movie options!
 
-## Features
+## Highlighted Features
 ![gif](https://media.giphy.com/media/ei4r1QGkj5BkE9XjUs/giphy.gif)
 * **Recipe and movie suggestion:** Filter through and get new suggestions <br><br><br>
 
